@@ -1,5 +1,5 @@
 import React from "react";
-let Bus = require("./images/buspic.png");
+let Bus = require("../images/buspic.png");
 const Advert = () => {
   return (
     <div className="mt-8 items-center flex flex-col">
