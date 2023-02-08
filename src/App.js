@@ -1,19 +1,12 @@
 import "./App.css";
-import Advert from "./components/Advert";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
-import Review from "./components/Review";
-import Selector from "./components/Selector";
+import Homepage from "./pages/Homepage";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Selector />
-      <Advert />
-      <Review  />
-      <Footer/>
-    </div>
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+    </Routes>
   );
 }
 

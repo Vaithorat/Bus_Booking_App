@@ -47,8 +47,8 @@ const Footer = () => {
         </div>
       </div>
     </div>
-    <hr className="border-1 border-gray-400 mx-8"/>
-      <div >All rights reserved - 2022</div>
+    <hr className="border-1 border-gray-400 mx-8 "/>
+      <div className="flex justify-center">All rights reserved - 2022</div>
   </div>
   );
 };
