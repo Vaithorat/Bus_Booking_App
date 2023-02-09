@@ -12,7 +12,6 @@ const BusAvail = () => {
       <Sidebar/>
       <div>
       <BusCard/>
-      <BusCard/>
       </div>
       </div>
       <Footer />
