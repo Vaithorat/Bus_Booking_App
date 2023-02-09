@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
-const bed = require("../images/noun-sleeping-661610.png");
+const bed = require("../images/seat.png");
 
 const BusCard = () => {
   const [selection, setSelection] = useState("All");

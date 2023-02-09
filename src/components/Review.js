@@ -5,7 +5,7 @@ const Review = () => {
     <div className="flex justify-center gap-8 bg-gray-200 py-8  ">
       <div className="flex-col flex border-2 w-[20vw] rounded-xl bg-white shadow-2xl items-start p-2 px-6">
         <div className=" flex justify-start items-center gap-2 pt-4">
-          <div className="rounded-[90%] bg-red-300 font-bold text-white p-4 text-5xl w-[4vw]">
+          <div className="flex justify-center rounded-[90%] bg-red-300 font-bold text-white p-4 text-5xl w-[4vw]">
             V
           </div>
           <div className="flex flex-col items-start">
@@ -25,7 +25,7 @@ const Review = () => {
       </div>
       <div className="flex-col flex border-2 w-[20vw] rounded-xl shadow-2xl bg-white  items-start p-2 px-6">
         <div className=" flex justify-start items-center gap-2 pt-4">
-          <div className="rounded-[90%] bg-red-300 font-bold text-white p-4 text-5xl w-[4vw]">
+          <div className="flex justify-center  rounded-[90%] bg-red-300 font-bold text-white p-4 text-5xl w-[4vw]">
             V
           </div>
           <div className="flex flex-col items-start">
@@ -45,7 +45,7 @@ const Review = () => {
       </div>
       <div className="flex-col flex border-2 w-[20vw] rounded-xl shadow-2xl bg-white  items-start p-2 px-6">
         <div className=" flex justify-start items-center gap-2 pt-4">
-          <div className="rounded-[90%] bg-blue-200 font-bold text-white p-4 text-5xl w-[4vw]">
+          <div className="flex justify-center rounded-[90%] bg-blue-200 font-bold text-white p-4 text-5xl w-[4vw]">
             S
           </div>
           <div className="flex flex-col items-start">

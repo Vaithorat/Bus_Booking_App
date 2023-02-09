@@ -8,26 +8,32 @@ const Selector = () => {
         className="bg-cover bg-center h-[60vh]"
         style={{ backgroundImage: `url(${Background}) ` }}
       >
-        <div className="flex-col flex items-center">
+        <div className="flex justify-center items-center">
           <div className="flex justify-center items-center h-[35vh] rounded-xl ">
-            <div className="border-2 pr-[15vw] py-4 rounded-l-xl text-left pl-3 bg-white">
+            <label className="border-2 text-gray-400 pr-2 font-bold  text-xl  py-4 rounded-l-xl text-left pl-3 bg-white">
               From
-              <div className="flex-col ">
-                Delhi, New Delhi, <div>India</div>
-              </div>
-            </div>
-            <div className="border-2 pr-[15vw] py-4 text-left pl-3 bg-white">
-              To
               <div>
-                Kanpur, Uttar Pradesh <div>India</div>
+                <input type="text" className="w-[20vw]"/>
               </div>
-            </div>
-            <div className="border-2 pr-[15vw] py-7 rounded-r-xl bg-white">
-              Travel Date
-              <div >12 Nov 2022</div>
-            </div>
+            </label>
           </div>
-          <button className="text-white bg-yellow-600 mt-6 p-4 text-3xl rounded-xl px-16 ">Search</button>
+          <label className="border-2  text-gray-400 font-bold  text-xl pr-2 py-4 text-left pl-3 bg-white">
+            To
+            <div>
+              <input type="text"  className="w-[20vw]" />
+            </div>
+          </label>
+          <label className="border-2 text-xl text-gray-400 pl-2 font-bold pr-2 py-4 rounded-r-xl bg-white">
+            Travel Date
+            <div className="text-black">
+              <input type="date" className="w-[10vw]" />
+            </div>
+          </label>
+        </div>
+        <div className="flex justify-center">
+          <button className=" text-white bg-yellow-600 mt-6 p-4 text-3xl rounded-xl px-16 ">
+            Search
+          </button>
         </div>
       </div>
     </div>
