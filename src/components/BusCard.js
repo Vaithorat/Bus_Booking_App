@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
+const bed = require("../images/noun-sleeping-661610.png");
 
 const BusCard = () => {
   const [selection, setSelection] = useState("All");
@@ -8,7 +9,7 @@ const BusCard = () => {
   };
   return (
     <>
-      <div className="flex">
+      <div className="flex ">
         <div className="border-2 pl-6 w-[50vw] flex flex-col mt-[12vh] ml-10 rounded-md h-[22vh] items-start">
           <div className="flex mt-3 items-center gap-2">
             <div className="font-bold text-xl">InterCity Smart Bus</div>
@@ -45,11 +46,12 @@ const BusCard = () => {
           </button>
         </div>
       </div>
-      <div className="border-2 ml-10 ">
+      {/* Hide below one to hide booking part */}
+      <div className=" border-2 ml-10 rounded-xl ">
         <div className="ml-4 font-bold text-2xl mt-4">Select Seats</div>
         <div className="flex justify-start gap-3 items-center ml-4">
           <div className="text-xl text-gray-400 font-bold">Seat Price</div>
-          <label className="shadow-lg p-2 px-4 flex">
+          <label className="shadow-lg p-2 px-4 flex rounded-xl">
             <input
               type="radio"
               value="All"
@@ -58,7 +60,7 @@ const BusCard = () => {
             />
             <div className="ml-2">All</div>
           </label>
-          <label className="shadow-lg p-2 px-4 flex ml-14">
+          <label className="shadow-lg p-2 px-4 flex ml-14 rounded-xl">
             <input
               type="radio"
               value="699"
@@ -67,7 +69,7 @@ const BusCard = () => {
             />
             <div className="ml-2">₹699</div>
           </label>
-          <label className="shadow-lg p-2 px-4 flex ml-14">
+          <label className="shadow-lg p-2 px-4 flex ml-14 rounded-xl">
             <input
               type="radio"
               value="899"
@@ -76,7 +78,7 @@ const BusCard = () => {
             />
             <div className="ml-2">₹899</div>
           </label>
-          <label className="shadow-lg p-2 px-4 flex ml-14">
+          <label className="shadow-lg p-2 px-4 flex ml-14 rounded-xl">
             <input
               type="radio"
               value="1199"
@@ -85,7 +87,7 @@ const BusCard = () => {
             />
             <div className="ml-2">₹1199</div>
           </label>
-          <label className="shadow-lg p-2 px-4 flex ml-14">
+          <label className="shadow-lg p-2 px-4 flex ml-14 rounded-xl">
             <input
               type="radio"
               value="1599"
@@ -109,6 +111,100 @@ const BusCard = () => {
                 Selected Seats
               </div>
             </ul>
+          </div>
+        </div>
+        <div className="flex ">
+          <div>
+            <div className=" border-2 w-[35vw] rounded-xl ml-6">
+              <div className="flex mb-3 mt-3 justify-center gap-2">
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+              </div>
+              <div className="flex mb-3 justify-center gap-2">
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+              </div>
+              <div className="flex ml-32 mb-3 justify-center gap-2 mt-12">
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+              </div>
+            </div>
+            <div className=" border-2 w-[35vw] mt-8 rounded-xl ml-6">
+              <div className="flex mb-3 mt-3 justify-center gap-2">
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+              </div>
+              <div className="flex mb-3 justify-center gap-2">
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+              </div>
+              <div className="flex ml-32 mb-5 justify-center gap-2 mt-12">
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+              </div>
+            </div>
+          </div>
+          <div className="flex-col border-2 ml-4 mb-4 rounded-xl p-4 w-[25vw]">
+            <div className="flex-col ">
+              <div className="font-bold">Picking & Dropping</div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div>-Pune</div>
+                  <div>Maharashtra</div>
+                </div>
+                <div className="font-bold text-lg">22:45</div>
+              </div>
+            </div>
+            <div className="flex-col ">
+              <div>Picking & Dropping</div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div>-Pune</div>
+                  <div>Maharashtra</div>
+                </div>
+                <div className="font-bold text-lg">22:45</div>
+              </div>
+            </div>
+            <hr className="border-2" />
+            <div className="font-bold">Seat No. 7</div>
+            <hr className="border-2 " />
+            <div className="font-bold">Fare Details</div>
+            <div className="flex justify-between">
+              <div>
+                <div>Amount</div>
+                <div>Taxi Stand, blah road</div>
+              </div>
+              <div className="font-bold text-xl">INR 750.00</div>
+            </div>
+            <div className="flex justify-center">
+              <button className="bg-orange-400 text-white p-4 w-[20vw] font-bold text-xl rounded-xl mt-4">Proceed to Book</button>
+            </div>
           </div>
         </div>
       </div>
