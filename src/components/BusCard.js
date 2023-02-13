@@ -144,7 +144,7 @@ const BusCard = () => {
             </div>
             <div className=" border-2 w-[35vw] mt-8 rounded-xl ml-6">
               <div className="flex mb-3 mt-3 justify-center gap-2">
-                <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                <img src={bed} alt="bed" className=" w-14 h-6 bg-blue-600 rounded-sm" />
                 <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
                 <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
                 <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
