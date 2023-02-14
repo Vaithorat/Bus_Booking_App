@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BusCard from "./BusCard";
 
 const Bus = () => {
+  // eslint-disable-next-line no-unused-vars
   const [busData, setBusData] = useState([
     {
       name: "InterCity Smart Bus",
