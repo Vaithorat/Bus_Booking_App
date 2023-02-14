@@ -6,9 +6,29 @@ const BusCard = (props) => {
   const busData = props.busData;
   const [selection, setSelection] = useState("All");
   const handleChange = (e) => {
+    const newPrice = parseInt(e.target.value);
+    if (!isNaN(newPrice)) {
+      setBusPrice(newPrice);
+    }
     setSelection(e.target.value);
   };
-
+  const [seatColor, setSeatColor] = useState("bg-white");
+  const handleClick = (event) => {
+    const target = event.target;
+    const currentColor = seatColor[target.id];
+    if (currentColor === "bg-blue-700") {
+      setSeatColor({ ...seatColor, [target.id]: "bg-white" });
+    } else {
+      setSeatColor({ ...seatColor, [target.id]: "bg-blue-700" });
+    }
+  };
+ 
+  const [busPrice, setBusPrice] = useState(null);
+  const [isHidden, setIsHidden] = useState(true)
+  const handleViewSeat=()=>{
+    setIsHidden(!isHidden)
+  }
+  
   return (
     <div>
       {busData.map((buses) => (
@@ -52,62 +72,32 @@ const BusCard = (props) => {
             <div className="border-2 px-6 w-fit flex flex-col mt-[12vh] rounded-md h-[22vh] gap-2 justify-center items-center">
               <div className="font-semibold text-lg">Trip Cost</div>
               <div className="text-gray-400 text-xs">Starting from</div>
-              <div className="font-bold text-4xl">₹ {buses.price}</div>
-              <button className="bg-orange-400 rounded-md text-white mx-9 p-2 px-8 font-semibold">
-                View Seat
+              <div className="font-bold text-4xl">₹ {busPrice || buses.price}</div>
+              <button onClick={handleViewSeat} className="bg-orange-400 rounded-md text-white mx-9 p-2 px-8 font-semibold">
+                {isHidden ? "View Seat" : "Hide Seat"}
               </button>
             </div>
           </div>
 
-          <div className=" border-2 ml-10 rounded-xl ">
+          <div style={{ display: isHidden ? 'none' : 'block' }} className=" border-2 ml-10 rounded-xl ">
             <div className="ml-4 font-bold text-2xl mt-4">Select Seats</div>
             <div className="flex justify-start gap-3 items-center ml-4">
               <div className="text-xl text-gray-400 font-bold">Seat Price</div>
-              <label className="shadow-lg p-2 px-4 flex rounded-xl">
-                <input
-                  type="radio"
-                  value="All"
-                  checked={selection === "All"}
-                  onChange={handleChange}
-                />
-                <div className="ml-2">All</div>
-              </label>
-              <label className="shadow-lg p-2 px-4 flex ml-14 rounded-xl">
-                <input
-                  type="radio"
-                  value="699"
-                  checked={selection === "699"}
-                  onChange={handleChange}
-                />
-                <div className="ml-2">₹699</div>
-              </label>
-              <label className="shadow-lg p-2 px-4 flex ml-14 rounded-xl">
-                <input
-                  type="radio"
-                  value="899"
-                  checked={selection === "899"}
-                  onChange={handleChange}
-                />
-                <div className="ml-2">₹899</div>
-              </label>
-              <label className="shadow-lg p-2 px-4 flex ml-14 rounded-xl">
-                <input
-                  type="radio"
-                  value="1199"
-                  checked={selection === "1199"}
-                  onChange={handleChange}
-                />
-                <div className="ml-2">₹1199</div>
-              </label>
-              <label className="shadow-lg p-2 px-4 flex ml-14 rounded-xl">
-                <input
-                  type="radio"
-                  value="1599"
-                  checked={selection === "1599"}
-                  onChange={handleChange}
-                />
-                <div className="ml-2">₹1599</div>
-              </label>
+              {["All", "699", "899", "1199", "1599"].map((price, index) => (
+                <label
+                  key={index}
+                  className="shadow-lg p-2 px-4 flex rounded-xl ml-2"
+                >
+                  <input
+                    type="radio"
+                    value={price}
+                    checked={selection === price}
+                    onChange={handleChange}
+                    onClick={handleClick}
+                  />
+                  <div className="ml-2">{`₹ ${price}`}</div>
+                </label>
+              ))}
               <div className="flex mr-12 mb-4 ml-[10vw]">
                 <ul>
                   <div className="flex items-center gap-2">
@@ -129,29 +119,143 @@ const BusCard = (props) => {
               <div>
                 <div className=" border-2 w-[35vw] rounded-xl ml-6">
                   <div className="flex mb-3 mt-3 justify-center gap-2">
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat1"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat1"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      id="seat1"
+                      alt="bed"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat2"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat3"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat3"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat4"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat4"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat5"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat5"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat6"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat6"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat7"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat7"]}`}
+                      onClick={handleClick}
+                    />
                   </div>
                   <div className="flex mb-3 justify-center gap-2">
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat8"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat8"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat9"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat9"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat10"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat10"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat11"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat11"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat12"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat12"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat13"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat13"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat14"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat14"]}`}
+                      onClick={handleClick}
+                    />
                   </div>
                   <div className="flex ml-32 mb-3 justify-center gap-2 mt-12">
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat15"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat15"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat16"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat16"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat17"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat17"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat18"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat18"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat19"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat19"]}`}
+                      onClick={handleClick}
+                    />
                   </div>
                 </div>
                 <div className=" border-2 w-[35vw] mt-8 rounded-xl ml-6">
@@ -159,30 +263,139 @@ const BusCard = (props) => {
                     <img
                       src={bed}
                       alt="bed"
-                      className=" w-14 h-6 bg-blue-600 rounded-sm"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat20"]}`}
+                      onClick={handleClick}
                     />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat21"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat21"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat22"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat22"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat23"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat23"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat24"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat24"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat25"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat25"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat26"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat26"]}`}
+                      onClick={handleClick}
+                    />
                   </div>
                   <div className="flex mb-3 justify-center gap-2">
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat27"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat27"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat28"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat28"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat29"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat29"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat30"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat30"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat31"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat31"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat32"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat32"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat33"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat33"]}`}
+                      onClick={handleClick}
+                    />
                   </div>
                   <div className="flex ml-32 mb-5 justify-center gap-2 mt-12">
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
-                    <img src={bed} alt="bed" className=" w-14 h-6 rounded-sm" />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat34"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat34"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat35"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat35"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat36"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat36"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat37"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat37"]}`}
+                      onClick={handleClick}
+                    />
+                    <img
+                      src={bed}
+                      alt="bed"
+                      id="seat38"
+                      className={`w-14 h-6 rounded-sm ${seatColor["seat38"]}`}
+                      onClick={handleClick}
+                    />
                   </div>
                 </div>
               </div>
@@ -192,7 +405,9 @@ const BusCard = (props) => {
                   <div className="flex items-center justify-between">
                     <div>
                       <div>{buses.depLocation}</div>
-                      <div className="text-gray-400 text-sm">{buses.depPoint}</div>
+                      <div className="text-gray-400 text-sm">
+                        {buses.depPoint}
+                      </div>
                     </div>
                     <div className="font-bold text-lg">{buses.depTime}</div>
                   </div>
@@ -201,7 +416,9 @@ const BusCard = (props) => {
                   <div className="flex items-center justify-between">
                     <div className="mt-8">
                       <div>{buses.arrLocation}</div>
-                      <div className="text-gray-400 text-sm" >{buses.arrPoint}</div>
+                      <div className="text-gray-400 text-sm">
+                        {buses.arrPoint}
+                      </div>
                     </div>
                     <div className="font-bold text-lg">{buses.arrTime}</div>
                   </div>
@@ -215,7 +432,7 @@ const BusCard = (props) => {
                     <div>Amount</div>
                     <div>{buses.depPoint}</div>
                   </div>
-                  <div className="font-bold text-xl">INR {buses.price}</div>
+                  <div className="font-bold text-xl">INR {busPrice || buses.price}</div>
                 </div>
                 <div className="flex justify-center">
                   <button className="bg-orange-400 text-white p-4 w-[20vw] font-bold text-xl rounded-xl mt-4">
