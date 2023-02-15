@@ -1,209 +1,166 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-const Sidebar = () => {
-  const [checkboxes, setCheckboxes] = useState({
-    morning: false,
-    afternoon: false,
-    evening: false,
-  });
-  const handleChange = (e) => {
-    setCheckboxes({
-      ...checkboxes,
-      [e.target.name]: e.target.checked,
-    });
-  };
-  const [selectionP, setSelectionP] = useState("mumbai");
-  const handleOptionChange = (e) => {
-    setSelectionP(e.target.value);
-  };
-  const [selectionD, setSelectionD] = useState("mumbai");
-  const handleOptionChangeD = (e) => {
-    setSelectionD(e.target.value);
-  };
+export const options = {
+  departureTime: [
+    { name: "morningD", label: "Morning Session" },
+    { name: "afternoonD", label: "Afternoon Session" },
+    { name: "eveningD", label: "Evening Session" },
+  ],
+  arrivalTime: [
+    { name: "morningA", label: "Morning Session" },
+    { name: "afternoonA", label: "Afternoon Session" },
+    { name: "eveningA", label: "Evening Session" },
+  ],
+  pickupPoint: [
+    { name: "mumbaiP", label: "Mumbai" },
+    { name: "kolkataP", label: "Kolkata" },
+    { name: "bangaloreP", label: "Bangalore" },
+  ],
+  dropOffPoint: [
+    { name: "mumbaiD", label: "Mumbai" },
+    { name: "kolkataD", label: "Kolkata" },
+    { name: "bangaloreD", label: "Bangalore" },
+  ],
+  busRating: [
+    { name: "fourstar", label: "4 stars or more" },
+    { name: "threestar", label: "3 stars or more" },
+    { name: "twostar", label: "0-2 stars" },
+  ],
+  busOperator: [
+    { name: "zing", label: "Zing Bus" },
+    { name: "intercity", label: "Intercity Smart" },
+    { name: "safar", label: "Safar Exp" },
+  ],
+};
 
+export const Checkbox = ({ name, label, checked, onChange }) => {
   return (
-    <div className="flex-col flex w-[20vw] mt-3 pb-4 pl-5">
-      <div className="flex  border-2 rounded-md my-3 justify-between px-5 py-2">
-        <div>Filter</div>
-        <div>Clear All</div>
-      </div>
-      <div className="flex flex-col border-2 mt-2 rounded-md pl-3 gap-y-2">
-        <div className="my-2 font-bold text-lg">Departure Time</div>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="morningD"
-            checked={checkboxes.morningD}
-            onChange={handleChange}
-          />
-          Morning Session
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="afternoonD"
-            checked={checkboxes.afternoonD}
-            onChange={handleChange}
-          />
-          Afternoon Session
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="eveningD"
-            checked={checkboxes.eveningD}
-            onChange={handleChange}
-          />
-          Evening Session
-        </label>
-        <hr className="mx-2" />
-        <div className="my-2 font-bold text-lg">Arrival Time</div>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="morningA"
-            checked={checkboxes.morningA}
-            onChange={handleChange}
-          />
-          Morning Session
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="afternoonA"
-            checked={checkboxes.afternoonA}
-            onChange={handleChange}
-          />
-          Afternoon Session
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="eveningA"
-            checked={checkboxes.eveningA}
-            onChange={handleChange}
-          />
-          Evening Session
-        </label>
-        <hr className="mx-2" />
-        <div className="my-2 font-bold text-lg">Pickup Point</div>
-        <label className="flex justify-start gap-4">
-          <input
-            type="radio"
-            value="mumbaiP"
-            checked={selectionP === "mumbaiP"}
-            onChange={handleOptionChange}
-          />
-          Mumbai
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="radio"
-            value="kolkataP"
-            checked={selectionP === "kolkataP"}
-            onChange={handleOptionChange}
-          />
-          Kolkata
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="radio"
-            value="bangaloreP"
-            checked={selectionP === "bangaloreP"}
-            onChange={handleOptionChange}
-          />
-          Bangalore
-        </label>
-        <hr className="mx-2" />
-        <div className="my-2 font-bold text-lg">Drop off Point</div>
-        <label className="flex justify-start gap-4">
-          <input
-            type="radio"
-            value="mumbaiD"
-            checked={selectionD === "mumbaiD"}
-            onChange={handleOptionChangeD}
-          />
-          Mumbai
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="radio"
-            value="kolkataD"
-            checked={selectionD === "kolkataD"}
-            onChange={handleOptionChangeD}
-          />
-          Kolkata
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="radio"
-            value="bangaloreD"
-            checked={selectionD === "bangaloreD"}
-            onChange={handleOptionChangeD}
-          />
-          Bangalore
-        </label>
-        <hr className="mx-2" />
-        <div className="my-2 font-bold text-lg">Bus Rating</div>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="fourstar"
-            checked={checkboxes.fourstar}
-            onChange={handleChange}
-          />
-          4 stars or more
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="threestar"
-            checked={checkboxes.threestar}
-            onChange={handleChange}
-          />
-          3 stars or more
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="twostar"
-            checked={checkboxes.twostar}
-            onChange={handleChange}
-          />
-          0-2 stars
-        </label>
-        <hr className="mx-2" />
-        <div className="my-2 font-bold text-lg">Bus Operator</div>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="zing"
-            checked={checkboxes.zing}
-            onChange={handleChange}
-          />
-          Zing Bus
-        </label>
-        <label className="flex justify-start gap-4">
-          <input
-            type="checkbox"
-            name="intercity"
-            checked={checkboxes.intercity}
-            onChange={handleChange}
-          />
-          Intercity Smart
-        </label>
-        <label className="flex justify-start gap-4 mb-4">
-          <input
-            type="checkbox"
-            name="safar"
-            checked={checkboxes.safar}
-            onChange={handleChange}
-          />
-          Safar Exp
-        </label>
-      </div>
+    <label className="flex justify-start gap-4">
+      <input type="checkbox" name={name} checked={checked} onChange={onChange} />
+      {label}
+    </label>
+  );
+};
+
+export const Radio = ({ name, value, label, checked, onChange }) => {
+  return (
+    <label className="flex justify-start gap-4">
+      <input type="radio" name={name} value={value} checked={checked} onChange={onChange} />
+      {label}
+    </label>
+  );
+};
+
+export const FilterSection = ({ title, options, type, selection, handleOptionChange, checkboxes, handleChange }) => {
+  return (
+    <div className="flex flex-col border-2 mt-2 rounded-md pl-3 gap-y-2 pr-28">
+      <div className="my-2 font-bold text-lg">{title}</div>
+      {type === "checkbox" && options.map((option) => (
+        <Checkbox
+          key={option.name}
+          name={option.name}
+          label={option.label}
+          checked={checkboxes[option.name]}
+          onChange={handleChange}
+        />
+      ))}
+      {type === "radio" && options.map((option) => (
+        <Radio
+          key={option.name}
+          name={title === "Pickup Point" ? "pickupPoint" : "dropOffPoint"}
+          value={option.name}
+          label={option.label}
+          checked={selection === option.name}
+          onChange={handleOptionChange}
+        />
+      ))}
+      <hr className="mx-2" />
     </div>
   );
 };
 
-export default Sidebar;
+export const Filters = () => {
+  const [selectionP, setSelectionP] = useState("");
+  const [selectionD, setSelectionD] = useState("");
+  const [checkboxes, setCheckboxes] = useState({
+    morningD: false,
+    afternoonD: false,
+    eveningD: false,
+    morningA: false,
+    afternoonA: false,
+    eveningA: false,
+    mumbaiP: false,
+    kolkataP: false,
+    bangaloreP: false,
+    mumbaiD: false,
+    kolkataD: false,
+    bangaloreD: false,
+    fourstar: false,
+    threestar: false,
+    twostar: false,
+    zing: false,
+    intercity: false,
+    safar: false,
+    });
+    
+    const handleOptionChange = (e) => {
+    const value = e.target.value;
+    if (e.target.name === "pickupPoint") {
+    setSelectionP(value);
+    } else {
+    setSelectionD(value);
+    }
+    };
+    
+    const handleChange = (e) => {
+    const { name } = e.target;
+    setCheckboxes((prev) => ({ ...prev, [name]: !prev[name] }));
+    };
+    
+    return (
+    <div className="flex flex-col mt-8">
+    <FilterSection
+         title="Departure Time"
+         options={options.departureTime}
+         type="checkbox"
+         checkboxes={checkboxes}
+         handleChange={handleChange}
+       />
+    <FilterSection
+         title="Arrival Time"
+         options={options.arrivalTime}
+         type="checkbox"
+         checkboxes={checkboxes}
+         handleChange={handleChange}
+       />
+    <FilterSection
+         title="Pickup Point"
+         options={options.pickupPoint}
+         type="radio"
+         selection={selectionP}
+         handleOptionChange={handleOptionChange}
+       />
+    <FilterSection
+         title="Drop Off Point"
+         options={options.dropOffPoint}
+         type="radio"
+         selection={selectionD}
+         handleOptionChange={handleOptionChange}
+       />
+    <FilterSection
+         title="Bus Rating"
+         options={options.busRating}
+         type="checkbox"
+         checkboxes={checkboxes}
+         handleChange={handleChange}
+       />
+    <FilterSection
+         title="Bus Operator"
+         options={options.busOperator}
+         type="checkbox"
+         checkboxes={checkboxes}
+         handleChange={handleChange}
+       />
+    </div>
+    );
+}

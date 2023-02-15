@@ -1,18 +1,16 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Sidebar from "../components/Sidebar";
+import { Filters } from "../components/Sidebar";
 import Bus from "../components/Bus";
 
 const BusAvail = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex">
-        <Sidebar />
-        <div>
-          <Bus />
-        </div>
+      <div className="flex mx-7">
+        <Filters />
+        <Bus />
       </div>
       <Footer />
     </div>

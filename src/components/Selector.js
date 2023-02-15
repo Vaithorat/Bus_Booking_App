@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 let Background = require("../images/background.jpg");
 
 const indianCities = [
@@ -32,6 +32,17 @@ const indianCities = [
 const Selector = () => {
   const [departure, setDeparture] = useState("");
   const [arrival, setArrival] = useState("");
+  const [cities, setCities] = useState(indianCities);
+
+  useEffect(() => {
+    if (departure) {
+      setCities(cities.filter((city) => city !== departure));
+    } else {
+      setCities(indianCities);
+    }
+    //eslint-disable-next-line
+  }, [departure]);
+
   return (
     <div>
       <div
@@ -52,7 +63,7 @@ const Selector = () => {
                   list="indianCities"
                 />
                 <datalist id="indianCities">
-                  {indianCities.map((city) => (
+                  {cities.map((city) => (
                     <option key={city} value={city} />
                   ))}
                 </datalist>
@@ -70,7 +81,7 @@ const Selector = () => {
                   list="indianCities"
                 />
                 <datalist id="indianCities">
-                  {indianCities.map((city) => (
+                  {cities.map((city) => (
                     <option key={city} value={city} />
                   ))}
                 </datalist>
