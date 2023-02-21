@@ -67,7 +67,7 @@ const BusCard = (props) => {
     "seat37",
     "seat38",
     "seat39",
-    "seat40"
+    "seat40",
   ];
   //change css to toggle between block and none
   const [isHidden, setIsHidden] = useState(true);
@@ -132,7 +132,6 @@ const BusCard = (props) => {
               </button>
             </div>
           </div>
-
           <div
             style={{ display: isHidden ? "none" : "block" }}
             className=" border-2 ml-10 rounded-xl "

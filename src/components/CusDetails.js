@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const CusDetails = () => {
   const navigate = useNavigate();
+
   function handleClick() {
     navigate("/payment-page");
   }
@@ -68,6 +69,7 @@ const CusDetails = () => {
                       Mobile No.
                       <input
                         type="tel"
+                        pattern={10}
                         name="name"
                         className="text-black flex border-2 p-2"
                       />
