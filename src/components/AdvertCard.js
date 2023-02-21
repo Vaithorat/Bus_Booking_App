@@ -4,8 +4,11 @@ const AdvertCard = (props) => {
   const adverts = props.advert;
   return (
     <div className="flex ">
-      {adverts.map((advert,index) => (
-        <div key={index} className="border-2 flex flex-col shadow-xl  justify-center items-center w-[12vw] p-8 mr-4 rounded-xl">
+      {adverts.map((advert, index) => (
+        <div
+          key={index}
+          className="border-2 flex flex-col shadow-xl  justify-center items-center w-[12vw] p-8 mr-4 rounded-xl"
+        >
           <img
             src={advert.photo}
             alt="bus"

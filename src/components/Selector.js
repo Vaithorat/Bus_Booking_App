@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 let Background = require("../images/background.jpg");
 
 const indianCities = [
@@ -42,7 +43,19 @@ const Selector = () => {
     }
     //eslint-disable-next-line
   }, [departure]);
+  const navigate = useNavigate();
 
+  function handleClick() {
+    if (
+      departure &&
+      arrival &&
+      document.querySelector('input[type="date"]').value
+    ) {
+      navigate("/bus-avail");
+    } else {
+      alert("Please fill in all the fields");
+    }
+  }
   return (
     <div>
       <div
@@ -55,6 +68,7 @@ const Selector = () => {
               From
               <div>
                 <input
+                  required
                   type="search"
                   name="departure"
                   className="text-black w-[20vw] p-2"
@@ -73,6 +87,7 @@ const Selector = () => {
               To
               <div>
                 <input
+                  required
                   type="search"
                   name="arrival"
                   className="text-black w-[20vw] p-2"
@@ -90,13 +105,17 @@ const Selector = () => {
             <label className="border-2 text-xl text-gray-400 pl-2 font-bold pr-2 py-4 rounded-r-xl bg-white">
               Travel Date
               <div className="text-black">
-                <input type="date" className="w-[10vw] p-2" />
+                <input type="date" required className="w-[10vw] p-2" />
               </div>
             </label>
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="text-white bg-yellow-600 mt-6 p-4 text-3xl rounded-xl px-16">
+          <button
+            type="submit"
+            onClick={handleClick}
+            className="text-white bg-yellow-600 mt-6 p-4 text-3xl rounded-xl px-16"
+          >
             Search
           </button>
         </div>

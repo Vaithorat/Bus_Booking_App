@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
+import { useNavigate } from "react-router";
 const bed = require("../images/seat.png");
 
 const BusCard = (props) => {
@@ -26,13 +27,57 @@ const BusCard = (props) => {
       setSeatColor({ ...seatColor, [target.id]: "bg-blue-700" });
     }
   };
-
+  const seatIds = [
+    "seat1",
+    "seat2",
+    "seat3",
+    "seat4",
+    "seat5",
+    "seat6",
+    "seat7",
+    "seat8",
+    "seat9",
+    "seat10",
+    "seat11",
+    "seat12",
+    "seat13",
+    "seat14",
+    "seat15",
+    "seat16",
+    "seat17",
+    "seat18",
+    "seat19",
+    "seat20",
+    "seat21",
+    "seat22",
+    "seat23",
+    "seat24",
+    "seat25",
+    "seat26",
+    "seat27",
+    "seat28",
+    "seat29",
+    "seat30",
+    "seat31",
+    "seat32",
+    "seat33",
+    "seat34",
+    "seat35",
+    "seat36",
+    "seat37",
+    "seat38",
+    "seat39",
+    "seat40"
+  ];
   //change css to toggle between block and none
   const [isHidden, setIsHidden] = useState(true);
   const handleViewSeat = () => {
     setIsHidden(!isHidden);
   };
-
+  const navigate = useNavigate();
+  function handleClicked() {
+    navigate("/info-page");
+  }
   return (
     <div>
       {busData.map((buses, index) => (
@@ -105,7 +150,6 @@ const BusCard = (props) => {
                     value={price}
                     checked={selection === price}
                     onChange={handleChange}
-
                   />
                   <div className="ml-2">{`₹ ${price}`}</div>
                 </label>
@@ -129,286 +173,80 @@ const BusCard = (props) => {
             </div>
             <div className="flex ">
               <div>
-                <div className=" border-2 w-[35vw] rounded-xl ml-6">
+                <div className="border-2 w-[35vw] rounded-xl ml-6">
                   <div className="flex mb-3 mt-3 justify-center gap-2">
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat1"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat1"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      id="seat2"
-                      alt="bed"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat2"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat3"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat3"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat4"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat4"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat5"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat5"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat6"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat6"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat7"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat7"]}`}
-                      onClick={handleClick}
-                    />
+                    {seatIds.slice(0, 7).map((id) => (
+                      <img
+                        key={id}
+                        src={bed}
+                        alt="bed"
+                        id={id}
+                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
+                        onClick={handleClick}
+                      />
+                    ))}
                   </div>
                   <div className="flex mb-3 justify-center gap-2">
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat8"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat8"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat9"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat9"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat10"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat10"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat11"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat11"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat12"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat12"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat13"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat13"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat14"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat14"]}`}
-                      onClick={handleClick}
-                    />
+                    {seatIds.slice(7, 14).map((id) => (
+                      <img
+                        key={id}
+                        src={bed}
+                        alt="bed"
+                        id={id}
+                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
+                        onClick={handleClick}
+                      />
+                    ))}
                   </div>
-                  <div className="flex ml-32 mb-3 justify-center gap-2 mt-12">
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat15"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat15"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat16"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat16"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat17"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat17"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat18"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat18"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat19"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat19"]}`}
-                      onClick={handleClick}
-                    />
+                  <div className="flex ml-16 mb-3 justify-center gap-2 mt-12">
+                    {seatIds.slice(14, 20).map((id) => (
+                      <img
+                        key={id}
+                        src={bed}
+                        alt="bed"
+                        id={id}
+                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
+                        onClick={handleClick}
+                      />
+                    ))}
                   </div>
                 </div>
-                <div className=" border-2 w-[35vw] mt-8 rounded-xl ml-6">
+                <div className="border-2 w-[35vw] mt-8 rounded-xl ml-6">
                   <div className="flex mb-3 mt-3 justify-center gap-2">
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat20"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat20"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat21"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat21"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat22"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat22"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat23"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat23"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat24"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat24"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat25"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat25"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat26"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat26"]}`}
-                      onClick={handleClick}
-                    />
+                    {seatIds.slice(20, 27).map((id) => (
+                      <img
+                        key={id}
+                        src={bed}
+                        alt="bed"
+                        id={id}
+                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
+                        onClick={handleClick}
+                      />
+                    ))}
                   </div>
-                  <div className="flex mb-3 justify-center gap-2">
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat27"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat27"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat28"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat28"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat29"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat29"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat30"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat30"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat31"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat31"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat32"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat32"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat33"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat33"]}`}
-                      onClick={handleClick}
-                    />
+                  <div className="flex mb-3 mt-3 justify-center gap-2">
+                    {seatIds.slice(27, 34).map((id) => (
+                      <img
+                        key={id}
+                        src={bed}
+                        alt="bed"
+                        id={id}
+                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
+                        onClick={handleClick}
+                      />
+                    ))}
                   </div>
-                  <div className="flex ml-32 mb-5 justify-center gap-2 mt-12">
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat34"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat34"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat35"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat35"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat36"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat36"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat37"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat37"]}`}
-                      onClick={handleClick}
-                    />
-                    <img
-                      src={bed}
-                      alt="bed"
-                      id="seat38"
-                      className={`w-14 h-6 rounded-sm ${seatColor["seat38"]}`}
-                      onClick={handleClick}
-                    />
+                  <div className="flex mb-3 mt-10 justify-center gap-2 ml-16 ">
+                    {seatIds.slice(34, 40).map((id) => (
+                      <img
+                        key={id}
+                        src={bed}
+                        alt="bed"
+                        id={id}
+                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
+                        onClick={handleClick}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -450,7 +288,10 @@ const BusCard = (props) => {
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <button className="bg-orange-400 text-white p-4 w-[20vw] font-bold text-xl rounded-xl mt-4">
+                  <button
+                    onClick={handleClicked}
+                    className="bg-orange-400 text-white p-4 w-[20vw] font-bold text-xl rounded-xl mt-4"
+                  >
                     Proceed to Book
                   </button>
                 </div>
