@@ -17,6 +17,7 @@ const BusCard = ({ busData }) => {
     setSelection(e.target.value);
   };
   const [currentPage, setCurrentPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -53,6 +54,7 @@ const BusCard = ({ busData }) => {
     { name: "Amenities", url: "amenities" },
     { name: "Reviews", url: "reviews" },
   ];
+  
   return (
     <div>
       <div className="p-6">
@@ -117,6 +119,7 @@ const BusCard = ({ busData }) => {
               </div>
               <button
                 onClick={handleViewSeat}
+                id={buses.key}
                 className="bg-orange-400 rounded-md text-white mx-9 p-2 px-8 font-semibold"
               >
                 {isHidden ? "View Seat" : "Hide Seat"}

@@ -23,7 +23,7 @@ const Bus = () => {
       arrPoint: "Mumbai Road",
     },
     {
-      name: "Blah Smart Bus",
+      name: "InterCity Smart Bus",
       rating: "4.5",
       type: "A/C Sleeper (2+1)",
       seats: "24",
@@ -41,7 +41,7 @@ const Bus = () => {
       arrPoint: "Mumbai Road",
     },
     {
-      name: "Blah Smart Bus",
+      name: "InterCity Smart Bus",
       rating: "4.5",
       type: "A/C Sleeper (2+1)",
       seats: "24",
@@ -51,7 +51,7 @@ const Bus = () => {
       duration: "07 hrs 59 min",
       arrTime: "06:20",
       arrDate: "17 Nov",
-      id: 2,
+      id: 3,
       price: 899,
       depLocation: "Pune",
       arrLocation: "Mumbai",
@@ -59,7 +59,7 @@ const Bus = () => {
       arrPoint: "Mumbai Road",
     },
     {
-      name: "Blah Smart Bus",
+      name: "InterCity Smart Bus",
       rating: "4.5",
       type: "A/C Sleeper (2+1)",
       seats: "24",
@@ -69,7 +69,7 @@ const Bus = () => {
       duration: "07 hrs 59 min",
       arrTime: "06:20",
       arrDate: "17 Nov",
-      id: 2,
+      id: 4,
       price: 899,
       depLocation: "Pune",
       arrLocation: "Mumbai",
@@ -77,7 +77,7 @@ const Bus = () => {
       arrPoint: "Mumbai Road",
     },
     {
-      name: "Blah Smart Bus",
+      name: "InterCity Smart Bus",
       rating: "4.5",
       type: "A/C Sleeper (2+1)",
       seats: "24",
@@ -87,26 +87,7 @@ const Bus = () => {
       duration: "07 hrs 59 min",
       arrTime: "06:20",
       arrDate: "17 Nov",
-      id: 2,
-      price: 899,
-      depLocation: "Pune",
-      arrLocation: "Mumbai",
-      depPoint: "Pune Road",
-      arrPoint: "Mumbai Road",
-    },
-
-    {
-      name: "Blah Smart Bus",
-      rating: "4.5",
-      type: "A/C Sleeper (2+1)",
-      seats: "24",
-      windowSeats: "0",
-      depTime: "22:45",
-      depDate: "16 Nov",
-      duration: "07 hrs 59 min",
-      arrTime: "06:20",
-      arrDate: "17 Nov",
-      id: 2,
+      id: 5,
       price: 899,
       depLocation: "Pune",
       arrLocation: "Mumbai",
@@ -114,9 +95,19 @@ const Bus = () => {
       arrPoint: "Mumbai Road",
     },
   ]);
+    const [selectedBusId, setSelectedBusId] = useState(null);
+
+  const handleSelectBus = (id) => {
+    setSelectedBusId(id);
+  };
   return (
     <div>
-      <BusCard busData={busData} />
+      <BusCard
+          key={busData.id}
+          busData={busData}
+          isSelected={selectedBusId === busData.id}
+          onSelect={handleSelectBus}
+        />
     </div>
   );
 };
