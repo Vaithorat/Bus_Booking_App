@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Ticket from "./Ticket";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
@@ -6,10 +6,24 @@ import { useNavigate } from "react-router-dom";
 
 const CusDetails = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    age: "",
+    gender: "",
+    email: "",
+    mobile: "",
+  });
+  const { name, age, gender, email, mobile } = formData;
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   function handleClick() {
     navigate("/payment-page");
   }
+  const isDisabled =
+    name === "" || age === "" || gender === "" || email === "" || mobile === "";
   return (
     <div className="flex-col ">
       <div>
@@ -33,7 +47,10 @@ const CusDetails = () => {
                       <input
                         type="name"
                         name="name"
+                        onChange={handleChange}
+                        value={name}
                         className="text-black flex border-2 w-[20vw] p-2"
+                        required
                       />
                     </label>
                     <label>
@@ -41,15 +58,22 @@ const CusDetails = () => {
                       <input
                         type="number"
                         name="age"
+                        value={age}
+                        onChange={handleChange}
                         className="text-black flex border-2 p-2"
+                        required
                       />
                     </label>
                     <label>
                       Gender
                       <select
                         name="gender"
+                        value={gender}
+                        onChange={handleChange}
                         className="text-black flex border-2 w-[10vw] p-2"
+                        required
                       >
+                        <option value="select">Select</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">Other</option>
@@ -61,17 +85,23 @@ const CusDetails = () => {
                       Email Id
                       <input
                         type="email"
-                        name="name"
+                        name="email"
+                        value={email}
+                        onChange={handleChange}
                         className="text-black flex border-2 w-[20vw]  p-2"
+                        required
                       />
                     </label>
                     <label>
                       Mobile No.
                       <input
                         type="tel"
-                        pattern={10}
-                        name="name"
+                        name="mobile"
+                        value={mobile}
+                        onChange={handleChange}
                         className="text-black flex border-2 p-2"
+                        pattern="[0-9]{10}"
+                        required
                       />
                     </label>
                   </div>
@@ -103,7 +133,10 @@ const CusDetails = () => {
             <div className="flex justify-center mt-12 ">
               <button
                 onClick={handleClick}
-                className="w-full h-[6vh] text-white bg-yellow-600 text-xl rounded-xl "
+                className={`w-full h-[6vh] text-white bg-yellow-600 text-xl rounded-xl ${
+                  isDisabled && "opacity-50 cursor-not-allowed"
+                } `}
+                disabled={isDisabled}
               >
                 Proceed to Payment
               </button>

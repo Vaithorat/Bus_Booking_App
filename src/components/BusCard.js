@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
 import { useNavigate } from "react-router";
+import ReactPaginate from "react-paginate";
+
 const bed = require("../images/seat.png");
 
-const BusCard = (props) => {
-  const busData = props.busData;
+const BusCard = ({ busData }) => {
+  // const busData = props.busData;
   const [selection, setSelection] = useState("All"); //for price radio buttons
-
   const [busPrice, setBusPrice] = useState(null);
   const handleChange = (e) => {
     const newPrice = parseInt(e.target.value); //change ticket price
@@ -15,7 +16,14 @@ const BusCard = (props) => {
     }
     setSelection(e.target.value);
   };
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = busData.slice(indexOfFirstItem, indexOfLastItem);
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected + 1);
+  };
   //change seat color on selection
   const [seatColor, setSeatColor] = useState("bg-white");
   const handleClick = (event) => {
@@ -27,48 +35,8 @@ const BusCard = (props) => {
       setSeatColor({ ...seatColor, [target.id]: "bg-blue-700" });
     }
   };
-  const seatIds = [
-    "seat1",
-    "seat2",
-    "seat3",
-    "seat4",
-    "seat5",
-    "seat6",
-    "seat7",
-    "seat8",
-    "seat9",
-    "seat10",
-    "seat11",
-    "seat12",
-    "seat13",
-    "seat14",
-    "seat15",
-    "seat16",
-    "seat17",
-    "seat18",
-    "seat19",
-    "seat20",
-    "seat21",
-    "seat22",
-    "seat23",
-    "seat24",
-    "seat25",
-    "seat26",
-    "seat27",
-    "seat28",
-    "seat29",
-    "seat30",
-    "seat31",
-    "seat32",
-    "seat33",
-    "seat34",
-    "seat35",
-    "seat36",
-    "seat37",
-    "seat38",
-    "seat39",
-    "seat40",
-  ];
+  const seatIds = Array.from({ length: 40 }, (_, index) => `seat${index + 1}`);
+
   //change css to toggle between block and none
   const [isHidden, setIsHidden] = useState(true);
   const handleViewSeat = () => {
@@ -78,12 +46,35 @@ const BusCard = (props) => {
   function handleClicked() {
     navigate("/info-page");
   }
+  const links = [
+    { name: "Live Tracking", url: "livetracking" },
+    { name: "Policies", url: "policies" },
+    { name: "Photos", url: "photos" },
+    { name: "Amenities", url: "amenities" },
+    { name: "Reviews", url: "reviews" },
+  ];
   return (
     <div>
-      {busData.map((buses, index) => (
+      <div className="p-6">
+        <ReactPaginate
+          pageCount={Math.ceil(busData.length / itemsPerPage)}
+          pageRangeDisplayed={5}
+          marginPagesDisplayed={2}
+          containerClassName="flex justify-center"
+          pageClassName="mx-2 py-1 px-3 border rounded-md"
+          activeClassName="bg-blue-500 text-white"
+          previousClassName="mx-2 py-1 px-3 border rounded-md"
+          nextClassName="mx-2 py-1 px-3 border rounded-md"
+          disabledClassName="opacity-50 cursor-not-allowed"
+          breakClassName="mx-2 py-1 px-3 border rounded-md"
+          breakLinkClassName="text-blue-500"
+          onPageChange={handlePageChange}
+        />
+      </div>
+      {currentItems.map((buses, index) => (
         <div key={index}>
           <div className="flex ">
-            <div className="border-2 pl-6 w-[50vw] flex flex-col mt-[12vh] ml-10 rounded-md h-[22vh] items-start">
+            <div className="border-2 pl-6 w-[50vw] flex flex-col my-2 ml-10 rounded-md h-[22vh] items-start">
               <div className="flex mt-3 items-center gap-2">
                 <div className="font-bold text-xl">{buses.name}</div>
                 <div className="flex items-center border-2 bg-green-600 justify-center gap-1 rounded-xl h-[4vh] text-white w-[3vw]">
@@ -111,14 +102,14 @@ const BusCard = (props) => {
                 <div>{buses.arrLocation}</div>
               </div>
               <ul className="flex justify-start gap-6 mt-7 text-blue-400 font-bold mb-2">
-                <a href="livetracking">Live Tracking</a>
-                <a href="policies">Policies</a>
-                <a href="photos">Photos</a>
-                <a href="amenities">Amenities</a>
-                <a href="reviews">Reviews</a>
+                {links.map((link) => (
+                  <a key={link.url} href={link.url}>
+                    {link.name}
+                  </a>
+                ))}
               </ul>
             </div>
-            <div className="border-2 px-6 w-fit flex flex-col mt-[12vh] rounded-md h-[22vh] gap-2 justify-center items-center">
+            <div className="border-2 px-6 w-fit flex flex-col my-2 rounded-md h-[22vh] gap-2 justify-center items-center">
               <div className="font-semibold text-lg">Trip Cost</div>
               <div className="text-gray-400 text-xs">Starting from</div>
               <div className="font-bold text-4xl">
