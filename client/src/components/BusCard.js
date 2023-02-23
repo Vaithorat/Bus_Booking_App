@@ -9,39 +9,50 @@ const BusCard = ({ busData }) => {
   // const busData = props.busData;
   const [selection, setSelection] = useState("All"); //for price radio buttons
   const [busPrice, setBusPrice] = useState(null);
-  const handleChange = (e) => {
-    const newPrice = parseInt(e.target.value); //change ticket price
-    if (!isNaN(newPrice)) {
-      setBusPrice(newPrice);
-    }
-    setSelection(e.target.value);
-  };
   const [currentPage, setCurrentPage] = useState(1);
   // eslint-disable-next-line no-unused-vars
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = busData.slice(indexOfFirstItem, indexOfLastItem);
+  //change seat color on selection
+  const [seatColor, setSeatColor] = useState("bg-white");
+  // eslint-disable-next-line no-unused-vars
+  const [activeSeatId, setActiveSeatId] = useState(null);
+  const [busStates, setBusStates] = useState({});
+
+  const handleChange = (e, id) => {
+    const newPrice = parseInt(e.target.value); //change ticket price
+    if (!isNaN(newPrice)) {
+      setBusPrice(newPrice);
+    }
+    setSelection((prevState) => ({ ...prevState, [id]: e.target.value }));
+  };
+
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected + 1);
   };
-  //change seat color on selection
-  const [seatColor, setSeatColor] = useState("bg-white");
+
   const handleClick = (event) => {
     const target = event.target;
     const currentColor = seatColor[target.id];
     if (currentColor === "bg-blue-700") {
       setSeatColor({ ...seatColor, [target.id]: "bg-white" });
+      setActiveSeatId({ ...activeSeatId, [busData.id]: null });
     } else {
       setSeatColor({ ...seatColor, [target.id]: "bg-blue-700" });
+      setActiveSeatId({ ...activeSeatId, [busData.id]: target.id });
     }
   };
   const seatIds = Array.from({ length: 40 }, (_, index) => `seat${index + 1}`);
 
   //change css to toggle between block and none
-  const [isHidden, setIsHidden] = useState(true);
-  const handleViewSeat = () => {
-    setIsHidden(!isHidden);
+
+  const handleViewSeat = (id) => {
+    setBusStates((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
   };
   const navigate = useNavigate();
   function handleClicked() {
@@ -54,7 +65,7 @@ const BusCard = ({ busData }) => {
     { name: "Amenities", url: "amenities" },
     { name: "Reviews", url: "reviews" },
   ];
-  
+
   return (
     <div>
       <div className="p-6">
@@ -73,8 +84,8 @@ const BusCard = ({ busData }) => {
           onPageChange={handlePageChange}
         />
       </div>
-      {currentItems.map((buses, index) => (
-        <div key={index}>
+      {currentItems.map((buses) => (
+        <div key={busData.id} id={busData.id}>
           <div className="flex ">
             <div className="border-2 pl-6 w-[50vw] flex flex-col my-2 ml-10 rounded-md h-[22vh] items-start">
               <div className="flex mt-3 items-center gap-2">
@@ -118,16 +129,16 @@ const BusCard = ({ busData }) => {
                 ₹ {busPrice || buses.price}
               </div>
               <button
-                onClick={handleViewSeat}
-                id={buses.key}
+                onClick={() => handleViewSeat(buses.id)}
+                id={`img-${buses.id}`}
                 className="bg-orange-400 rounded-md text-white mx-9 p-2 px-8 font-semibold"
               >
-                {isHidden ? "View Seat" : "Hide Seat"}
+                {busStates[buses.id] ? "Hide Seat" : "View Seat"}
               </button>
             </div>
           </div>
           <div
-            style={{ display: isHidden ? "none" : "block" }}
+            style={{ display: busStates[buses.id] ? "block" : "none" }}
             className=" border-2 ml-10 rounded-xl "
           >
             <div className="ml-4 font-bold text-2xl mt-4">Select Seats</div>
@@ -138,11 +149,13 @@ const BusCard = ({ busData }) => {
                   key={index}
                   className="shadow-lg p-2 px-4 flex rounded-xl ml-2"
                 >
+
                   <input
                     type="radio"
                     value={price}
-                    checked={selection === price}
-                    onChange={handleChange}
+                    checked={selection[buses.id] === price}
+                    id={buses.id}
+                    onChange={(e) => handleChange(e, buses.id)}
                   />
                   <div className="ml-2">{`₹ ${price}`}</div>
                 </label>
@@ -168,13 +181,13 @@ const BusCard = ({ busData }) => {
               <div>
                 <div className="border-2 w-[35vw] rounded-xl ml-6">
                   <div className="flex mb-3 mt-3 justify-center gap-2">
-                    {seatIds.slice(0, 7).map((id) => (
+                    {seatIds.slice(0, 7).map((seatId) => (
                       <img
-                        key={id}
+                        key={seatId}
                         src={bed}
                         alt="bed"
-                        id={id}
-                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
+                        id={seatId}
+                        className={`w-14 h-6 rounded-sm ${seatColor[seatId]}`}
                         onClick={handleClick}
                       />
                     ))}
