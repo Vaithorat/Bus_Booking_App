@@ -6,46 +6,47 @@ const Seat = ({ seatno, setSelectedSeat, filteredSeats, setFilterPrice }) => {
 
   const price = useMemo(() => {
     switch (seatno) {
-      case "01":
-      case "07":
       case "08":
-      case "14":
-      case "19":
-      case "20":
-      case "26":
-      case "27":
-      case "33":
-      case "38":
-        return "699";
-      case "02":
-      case "06":
       case "09":
-      case "13":
-      case "18":
-      case "21":
-      case "25":
-      case "28":
-      case "32":
-      case "37":
-        return "899";
-      case "03":
-      case "05":
       case "10":
+      case "11":
       case "12":
-      case "15":
-      case "17":
+      case "13":
+      case "14":
+      case "27":
+      case "28":
+      case "29":
+      case "30":
+      case "31":
+      case "32":
+      case "33":
+        return "699";
+      case "01":
+      case "02":
+      case "03":
+      case "04":
+      case "05":
+      case "06":
+      case "07":
+        return "899";
+      case "20":
+      case "21":
       case "22":
       case "23":
-      case "31":
-      case "34":
-      case "36":
-        return "1199";
-      case "04":
-      case "11":
-      case "16":
       case "24":
-      case "29":
+      case "25":
+      case "26":
+        return "1199";
+      case "15":
+      case "16":
+      case "17":
+      case "18":
+      case "19":
+      case "34":
       case "35":
+      case "36":
+      case "37":
+      case "38":
         return "1599";
       default:
         return "";
