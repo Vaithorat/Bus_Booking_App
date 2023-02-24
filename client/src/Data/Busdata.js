@@ -1,0 +1,28 @@
+export const busData = [
+    {
+      id: "1",
+      name: "InterCity Smart Bus",
+      busType: "AC Sleeper (2+1)",
+      seatsLeft: "24",
+      windowLeft: "0",
+      depTime: "22:45",
+      deptDate: "16 Nov",
+      arrTime: "06:20",
+      arrDate: "17 Nov",
+      duration: "07 hrs 59 min",
+      rating: "4.5",
+    },
+    {
+      id: "2",
+      name: "Zing Smart Bus",
+      busType: "AC Sleeper (2+1)",
+      seatsLeft: "24",
+      windowLeft: "0",
+      depTime: "22:45",
+      deptDate: "16 Nov",
+      arrTime: "06:20",
+      arrDate: "17 Nov",
+      duration: "07 hrs 59 min",
+      rating: "4.5",
+    },
+  ];

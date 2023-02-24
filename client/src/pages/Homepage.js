@@ -29,7 +29,7 @@ const Home_Page = (props) => {
   const { from, to, travelDate } = formValues;
   const isFormValid = from && to && travelDate;
 
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState("");
   const data = ["Mumbai ", "Pune", "Delhi", "Chennai", "Banglore"];
   const cardDetails = [
     {
@@ -157,7 +157,7 @@ const Home_Page = (props) => {
         ))}
       </div>
       <div className=" flex justify-center">
-        <div className="font-bold w-[20vw] text-2xl pt-[5vh]">
+        <div className="font-bold w-[24vw] text-4xl pt-[3vh]">
           Here's what a few of our customers have to say
         </div>
       </div>
