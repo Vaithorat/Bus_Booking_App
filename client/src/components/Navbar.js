@@ -16,9 +16,9 @@ const Navbar = () => {
     <div className=" text-lg shadow-xl py-5 px-[100px]  drop-shadow-xl">
       <div className="flex justify-between ">
         <div className="flex gap-9">
-          <div className="flex text-yellow-600">
+          <div className="flex text-yellow-600 items-center">
             <span class="material-icons self-center"><FaBus/></span>
-            <button onClick={handleClick}>RESERVE</button>
+            <button onClick={handleClick} className="font-bold ml-2 text-xl">RESERVE</button>
           </div>
           <button>Ticket</button>
           <button>Contact Us</button>

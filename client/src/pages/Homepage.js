@@ -2,13 +2,33 @@ import React, { useState } from "react";
 import Card from "../Components/Card";
 import RatingCard from "../Components/RatingCard";
 import Background from "../images/background.jpg";
-import { Link } from "react-router-dom";
 import buses from "../images/buspic.png";
 import emoji from "../images/emojis.png";
 import ticket from "../images/ticket.png";
-import SearchInput from "../Components/SearchInput";
+import { useNavigate } from "react-router-dom";
 
 const Home_Page = (props) => {
+  const navigate = useNavigate();
+  const [formValues, setFormValues] = useState({
+    from: "",
+    to: "",
+    travelDate: "",
+  });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (formValues.from && formValues.to && formValues.travelDate) {
+      navigate("/availablebus");
+    } else {
+      alert("Please fill all fields before searching.");
+    }
+  };
+  const { from, to, travelDate } = formValues;
+  const isFormValid = from && to && travelDate;
+
   const [value, setValue] = useState("");
   const data = ["Mumbai ", "Pune", "Delhi", "Chennai", "Banglore"];
   const cardDetails = [
@@ -58,37 +78,70 @@ const Home_Page = (props) => {
         className="bg-cover bg-center h-[60vh]"
         style={{ backgroundImage: `url(${Background}) ` }}
       >
-        <div className="flex-col flex items-center">
-          <div className="flex flex-col md:flex-row justify-center items-center pt-[15vh] h-[35vh] rounded-xl ">
-            <div className="border-2 pr-3 py-5 rounded-l-xl text-left pl-3 bg-white">
-              <label>
-                From
-                <SearchInput setValue={setValue} data={data} />
-              </label>
+        <form onSubmit={handleSubmit}>
+          <div className="flex-col flex items-center">
+            <div className="flex flex-col md:flex-row justify-center items-center pt-[15vh] h-[35vh] rounded-xl ">
+              <div className="border-2 pr-3 py-4 rounded-l-xl text-left pl-3 bg-white">
+                <label className="text-xl font-bold">
+                  From
+                  <input
+                    type="text"
+                    name="from"
+                    className="flex w-[18vw] h-12 my-2 text-xl"
+                    value={from}
+                    list="from-list"
+                    onChange={handleChange}
+                  />
+                  <datalist id="from-list">
+                    {data.map((city, id) => (
+                      <option key={id} value={city} />
+                    ))}
+                  </datalist>
+                </label>
+              </div>
+              <div className="border-2 pr-3 py-4 flex flex-col text-left pl-3 bg-white">
+                <label className=" text-xl font-bold">
+                  To
+                  <input
+                    type="text"
+                    name="to"
+                    className="flex w-[18vw] h-12 my-2 text-xl"
+                    value={to}
+                    list="from-list"
+                    onChange={handleChange}
+                  />
+                    <datalist id="from-list">
+                    {data.map((city, id) => (
+                      <option key={id} value={city} />
+                    ))}
+                  </datalist>
+                </label>
+              </div>
+              <div className="border-2 pr-3 py-4 pl-3 text-left  rounded-r-xl bg-white">
+                <label className="text-xl font-bold ">
+                  Travel Date
+                  <input
+                    type="date"
+                    name="travelDate"
+                    className="flex w-[12vw] h-12 my-2 text-xl "
+                    value={travelDate}
+                    onChange={handleChange}
+                  />
+                
+                </label>
+              </div>
             </div>
-            <div className="border-2 pr-3 py-5 text-left pl-3 bg-white">
-              <label>
-                To
-                <SearchInput setValue={setValue} data={data} />
-              </label>
-            </div>
-            <div className="border-2 pr-3 py-5 pl-3 rounded-r-xl bg-white">
-              <label>
-                Travel Date
-                <input
-                  type="date"
-                  className="form-control relative flex-auto block w-full px-3 py-1.5  border border-solid    "
-                  placeholder="Travel-Date"
-                  aria-label="Travel-Date"
-                  aria-describedby="button-addon2"
-                />
-              </label>
-            </div>
+            <button
+              type="submit"
+              className={`text-white bg-orange-500 mt-6 p-4 text-3xl rounded-xl px-16 ${
+                isFormValid ? "" : "opacity-50 cursor-not-allowed"
+              }`}
+              disabled={!isFormValid}
+            >
+              Search
+            </button>
           </div>
-          <button className="text-white bg-[#FF8700] mt-6 p-4 text-3xl rounded-xl px-16 ">
-            <Link to="/availablebus">Search</Link>
-          </button>
-        </div>
+        </form>
       </div>
       <div className="font-bold text-center py-10 text-2xl">
         Travel with world's largest bus service
