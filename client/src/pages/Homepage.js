@@ -9,23 +9,23 @@ import ticket from "../images/ticket.png";
 import SearchInput from "../Components/SearchInput";
 
 const Home_Page = (props) => {
-  const [val, setVal] = useState("");
+  const [value, setValue] = useState("");
   const data = ["Mumbai ", "Pune", "Delhi", "Chennai", "Banglore"];
   const cardDetails = [
     {
       title: "2000+",
       description: "Bus collection",
-      imageURL: buses,
+      image: buses,
     },
     {
       title: "20 Million",
       description: "Happy customers globally",
-      imageURL: emoji,
+      image: emoji,
     },
     {
       title: "5000+",
       description: "Tickets book everyday",
-      imageURL: ticket,
+      image: ticket,
     },
   ];
   const ratingsDetails = [
@@ -63,13 +63,13 @@ const Home_Page = (props) => {
             <div className="border-2 pr-3 py-5 rounded-l-xl text-left pl-3 bg-white">
               <label>
                 From
-                <SearchInput setVal={setVal} data={data} />
+                <SearchInput setValue={setValue} data={data} />
               </label>
             </div>
             <div className="border-2 pr-3 py-5 text-left pl-3 bg-white">
               <label>
                 To
-                <SearchInput setVal={setVal} data={data} />
+                <SearchInput setValue={setValue} data={data} />
               </label>
             </div>
             <div className="border-2 pr-3 py-5 pl-3 rounded-r-xl bg-white">
@@ -86,14 +86,7 @@ const Home_Page = (props) => {
             </div>
           </div>
           <button className="text-white bg-[#FF8700] mt-6 p-4 text-3xl rounded-xl px-16 ">
-            <Link
-              to="/availablebus"
-              onClick={() => {
-                props.setAuthentication(true);
-              }}
-            >
-              Search
-            </Link>
+            <Link to="/availablebus">Search</Link>
           </button>
         </div>
       </div>
@@ -106,7 +99,7 @@ const Home_Page = (props) => {
             key={id}
             title={cardDetail.title}
             description={cardDetail.description}
-            imageURL={cardDetail.imageURL}
+            image={cardDetail.image}
           />
         ))}
       </div>

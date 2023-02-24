@@ -10,90 +10,123 @@ const BusCard = (props) => {
   const [filterPrice, setFilterPrice] = useState("");
   const [selectedSeat, setSelectedSeat] = useState("");
   const [filteredSeats, setFilteredSeats] = useState(
-    Array.from({ length: 38 }, (_, index) => String(index + 1).padStart(2, '0'))
+    Array.from({ length: 38 }, (_, index) => String(index + 1).padStart(2, "0"))
   );
-  
+
   const pricesToSeats = {
-    "699": ["08", "09", "10", "11", "12", "13", "14"],
-    "899": ["02", "06", "08", "13", "12", "20", "25", "28", "32", "37"],
-    "1199": ["03", "06", "09", "12", "15", "17", "21", "24", "27", "29", "33", "36"],
-    "1599": ["15", "17", "16", "18", "19","34","35","36","37","38"],
+    699: ["08", "09", "10", "11", "12", "13", "14"],
+    899: ["02", "06", "08", "13", "12", "20", "25", "28", "32", "37"],
+    1199: [
+      "03",
+      "06",
+      "09",
+      "12",
+      "15",
+      "17",
+      "21",
+      "24",
+      "27",
+      "29",
+      "33",
+      "36",
+    ],
+    1599: ["15", "17", "16", "18", "19", "34", "35", "36", "37", "38"],
   };
-  
+  const busData = [
+    {
+      id: "1",
+      name: "InterCity Smart Bus",
+      busType: "AC Sleeper (2+1)",
+      seatsLeft: "24",
+      windowLeft: "0",
+      depTime: "22:45",
+      deptDate: "16 Nov",
+      arrTime: "06:20",
+      arrDate: "17 Nov",
+      duration: "07 hrs 59 min",
+      rating: "4.5",
+    },
+  ];
   const setFilter = (event) => {
     const price = event.target.value;
     setFilteredSeats(pricesToSeats[price] || []);
   };
-  
+
   return (
     <div className="mb-4 ">
-      <div className="border-2 border-gray-300 flex rounded-md ">
-        <div className="basis-3/4 border-r-2 border-gray-300 text-left p-4">
-          <div className="flex ">
-            <div className="font-bold flex">
-              <div className="text-xl flex">InterCity Smart Bus </div>
-              <div className="bg-green-700 text-md flex items-center w-fit rounded-md text-white p-1 ml-2">
-                <AiOutlineStar className="mr-1"/> 4.5
+      {busData.map((bus) => (
+        <div className="border-2 border-gray-300 flex rounded-md ">
+          <div className="basis-3/4 border-r-2 border-gray-300 text-left p-4">
+            <div className="flex ">
+              <div className="font-bold flex">
+                <div className="text-xl flex">{bus.name}</div>
+                <div className="bg-green-700 text-md flex items-center w-fit rounded-md text-white p-1 ml-2">
+                  <AiOutlineStar className="mr-1" /> {bus.rating}
+                </div>
+                <div className="px-2 flex text-gray-400 text-md items-center">
+                  Ratings
+                </div>
               </div>
-              <div className="px-2 flex text-gray-400 items-center">
-                Ratings
+            </div>
+            <div className="flex py-2 text-xs text-slate-500">
+              <div>
+                <span className="border-r pr-2 border-slate-600">
+                  {bus.busType}
+                </span>
+              </div>
+              <div>
+                <span className="border-r px-2 border-slate-600">
+                  {bus.seatsLeft} seats left
+                </span>
+              </div>
+              <div>
+                <span className="px-2">{bus.windowLeft} windows seat</span>
               </div>
             </div>
-          </div>
-          <div className="flex py-2 text-xs text-slate-500">
-            <div>
-              <span className="border-r pr-2 border-slate-600">
-                AC Sleeper (2-1)
-              </span>
-            </div>
-            <div>
-              <span className="border-r px-2 border-slate-600">
-                24 seats left
-              </span>
-            </div>
-            <div>
-              <span className="px-2">0 windows seat</span>
-            </div>
-          </div>
-          <div className="flex py-2 ">
-            <div>
-              <span className=" pr-2 text-lg font-semibold">22:45, 16 NOV</span>
-            </div>
-            <div>
-              <span className="px-2 text-s text-slate-500 text-center align-middle">
-                ----------07 hrs 59 mins---------
-              </span>
-            </div>
-            <div>
-              <span className="px-2 text-lg font-semibold">6:20, 17 NOV</span>
-            </div>
-          </div>
-          <div className="flex text-blue-700 pt-8">
-            {links.map((link, id) => (
-              <div key={id} className="pr-8">
-                {link}
+            <div className="flex py-2 ">
+              <div>
+                <span className=" pr-2 text-lg font-semibold">
+                  {bus.depTime}, {bus.deptDate}
+                </span>
               </div>
-            ))}
+              <div>
+                <span className="px-2 text-s text-slate-500 text-center align-middle">
+                  ----------{bus.duration}---------
+                </span>
+              </div>
+              <div>
+                <span className="px-2 text-lg font-semibold">
+                  {bus.arrTime}, {bus.arrDate}
+                </span>
+              </div>
+            </div>
+            <div className="flex text-blue-700 font-bold pt-8">
+              {links.map((link, id) => (
+                <a href={link} key={id} className="pr-8">
+                  {link}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="basis-1/4 p-4">
-          <div className="text-md font-semibold">Trip Cost</div>
-          <div className="pt-3 text-xs text-gray-500">Starting from</div>
-          <div className="font-bold text-2xl">₹ 899</div>
-          <button
-            className="bg-orange-500 text-white  mt-3 py-2 px-8 rounded-md
+          <div className="basis-1/4 p-4">
+            <div className="text-md font-semibold">Trip Cost</div>
+            <div className="pt-3 text-xs text-gray-500">Starting from</div>
+            <div className="font-bold text-2xl">₹ 899</div>
+            <button
+              className="bg-orange-500 text-white  mt-3 py-2 px-8 rounded-md
     duration-500"
-            onClick={() =>
-              props.busNo === props.showBus
-                ? props.setShowBus("")
-                : props.setShowBus(props.busNo)
-            }
-          >
-            View Seat
-          </button>
+              onClick={() =>
+                props.busNo === props.showBus
+                  ? props.setShowBus("")
+                  : props.setShowBus(props.busNo)
+              }
+            >
+              View Seat
+            </button>
+          </div>
         </div>
-      </div>
+      ))}
       {props.showBus === props.busNo && (
         <div className="border-2 border-gray-300 rounded-md ">
           <div className="m-2 flex">

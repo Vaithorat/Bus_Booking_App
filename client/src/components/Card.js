@@ -3,17 +3,17 @@ import React from "react";
 const Card = (props) => {
   return (
     <div>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg w-72 mx-7 my-5 border-2 drop-shadow-md md:my-1  h-64">
+      <div className=" rounded-xl shadow-md w-[14vw] mx-7 my-5 border-2 drop-shadow-md h-fit ">
         <img
-          className="w-full h-40"
-          src={props.imageURL}
+          className="w-full h-[20vh]"
+          src={props.image}
           alt="bus"
         />
         <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{props.title}</div>
-          <p className="text-gray-700 text-base">
+          <div className="font-bold text-2xl mb-2">{props.title}</div>
+          <div>
             {props.description}
-          </p>
+          </div>
         </div>
       </div>
     </div>
