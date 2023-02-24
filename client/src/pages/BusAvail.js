@@ -1,20 +1,19 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { Filters } from "../components/Sidebar";
-import Bus from "../components/Bus";
+import React,{useState} from "react";
+import BusCard from "../Components/BusCard";
+import Filters from "../Components/Filters";
 
-const BusAvail = () => {
+const Available_bus_page = () => {
+  const [showBus, setShowBus] = useState('')
   return (
-    <div>
-      <Navbar />
-      <div className="flex mx-7">
-        <Filters />
-        <Bus />
+    <div className="flex flex-row ">
+      <Filters />
+      <div className="basis-3/4 mt-24 mb-5 mr-5">
+        <BusCard busNo="01" showBus={showBus} setShowBus={setShowBus}/>
+        <BusCard busNo="02" showBus={showBus} setShowBus={setShowBus}/>
+        <BusCard busNo="03" showBus={showBus} setShowBus={setShowBus}/>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default BusAvail;
+export default Available_bus_page;

@@ -1,30 +1,33 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const FareDetails = () => {
+const FareDetailsCard = () => {
   return (
-    <div className="border-2 flex flex-col items-center w-[26vw]">
-      <h1>Fare Details</h1>
-      <div className="flex">
-        <div>Base Fare</div>
-        <div>799</div>
+    <div className="basis-1/4 ml-3">
+      <div className="p-4 border-2 rounded-md">
+        <div className="text-left font-bold text-2xl">Fare Details</div>
+        <div className="flex justify-between my-2">
+          <div>Base Fare</div>
+          <div className="font-bold">₹799</div>
+        </div>
+        <div className="flex justify-between my-2">
+          <div>Tax</div>
+          <div className="font-bold">₹150</div>
+        </div>
+        <div className="flex justify-between my-2">
+          <div>Offer Applied</div>
+          <div className="font-bold">₹50</div>
+        </div>
+        <div className="flex justify-between my-2 mt-8 pt-4 border-t-2">
+          <div className="  text-xl font-bold">Total Price</div>
+          <div className="font-bold text-2xl">₹899</div>
+        </div>
+        <button className="bg-orange-500  text-white font-bold text-xl mt-6 py-4 px-8 w-full rounded ">
+          <Link to="/payment">Proceed to Payment</Link>
+        </button>
       </div>
-      <div className="flex">
-        <div>Tax</div>
-        <div>150</div>
-      </div>
-      <div className="flex">
-        <div>Offer Applied</div>
-        <div>50</div>
-      </div>
-      <div className="flex">
-        <div>Total Price</div>
-        <div>899</div>
-      </div>
-      <button className="bg-orange-400 text-white p-4 w-[20vw] font-bold text-xl rounded-xl mt-4">
-        Proceed to Book
-      </button>
     </div>
   );
 };
 
-export default FareDetails;
+export default FareDetailsCard;

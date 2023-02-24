@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { FaBus } from "react-icons/fa";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Navbar = () => {
       <div className="flex justify-between ">
         <div className="flex gap-9">
           <div className="flex text-yellow-600">
-            <span class="material-icons self-center">directions_bus</span>
+            <span class="material-icons self-center"><FaBus/></span>
             <button onClick={handleClick}>RESERVE</button>
           </div>
           <button>Ticket</button>

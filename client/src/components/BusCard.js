@@ -1,311 +1,470 @@
 import React, { useState } from "react";
+import Seat from "./Seat";
+import { Link } from "react-router-dom";
 import { AiOutlineStar } from "react-icons/ai";
-import { useNavigate } from "react-router";
-import ReactPaginate from "react-paginate";
 
-const bed = require("../images/seat.png");
-
-const BusCard = ({ busData }) => {
-  // const busData = props.busData;
-  const [selection, setSelection] = useState("All"); //for price radio buttons
-  const [busPrice, setBusPrice] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
-  const [itemsPerPage, setItemsPerPage] = useState(3);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = busData.slice(indexOfFirstItem, indexOfLastItem);
-  //change seat color on selection
-  const [seatColor, setSeatColor] = useState("bg-white");
-  // eslint-disable-next-line no-unused-vars
-  const [activeSeatId, setActiveSeatId] = useState(null);
-  const [busStates, setBusStates] = useState({});
-
-  const handleChange = (e, id) => {
-    const newPrice = parseInt(e.target.value); //change ticket price
-    if (!isNaN(newPrice)) {
-      setBusPrice(newPrice);
-    }
-    setSelection((prevState) => ({ ...prevState, [id]: e.target.value }));
+const BusCard = (props) => {
+  const links = ["Live Tracking", "Policies", "Photos", "Amenities", "Reviews"];
+  const priceRanges = ["All", "699", "899", "1199", "1599"];
+  const seats = ["Vacant", "Reserved", "Selected"];
+  const [filterPrice, setFilterPrice] = useState("");
+  const [selectedSeat, setSelectedSeat] = useState("");
+  const [filteredSeats, setFilteredSeats] = useState(
+    Array.from({ length: 38 }, (_, index) => String(index + 1).padStart(2, '0'))
+  );
+  
+  const pricesToSeats = {
+    "699": ["08", "09", "10", "11", "12", "13", "14"],
+    "899": ["02", "06", "08", "13", "12", "20", "25", "28", "32", "37"],
+    "1199": ["03", "06", "09", "12", "15", "17", "21", "24", "27", "29", "33", "36"],
+    "1599": ["15", "17", "16", "18", "19","34","35","36","37","38"],
   };
-
-  const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected + 1);
+  
+  const setFilter = (event) => {
+    const price = event.target.value;
+    setFilteredSeats(pricesToSeats[price] || []);
   };
-
-  const handleClick = (event) => {
-    const target = event.target;
-    const currentColor = seatColor[target.id];
-    if (currentColor === "bg-blue-700") {
-      setSeatColor({ ...seatColor, [target.id]: "bg-white" });
-      setActiveSeatId({ ...activeSeatId, [busData.id]: null });
-    } else {
-      setSeatColor({ ...seatColor, [target.id]: "bg-blue-700" });
-      setActiveSeatId({ ...activeSeatId, [busData.id]: target.id });
-    }
-  };
-  const seatIds = Array.from({ length: 40 }, (_, index) => `seat${index + 1}`);
-
-  //change css to toggle between block and none
-
-  const handleViewSeat = (id) => {
-    setBusStates((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
-  };
-  const navigate = useNavigate();
-  function handleClicked() {
-    navigate("/info-page");
-  }
-  const links = [
-    { name: "Live Tracking", url: "livetracking" },
-    { name: "Policies", url: "policies" },
-    { name: "Photos", url: "photos" },
-    { name: "Amenities", url: "amenities" },
-    { name: "Reviews", url: "reviews" },
-  ];
-
+  
   return (
-    <div>
-      <div className="p-6">
-        <ReactPaginate
-          pageCount={Math.ceil(busData.length / itemsPerPage)}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={2}
-          containerClassName="flex justify-center"
-          pageClassName="mx-2 py-1 px-3 border rounded-md"
-          activeClassName="bg-blue-500 text-white"
-          previousClassName="mx-2 py-1 px-3 border rounded-md"
-          nextClassName="mx-2 py-1 px-3 border rounded-md"
-          disabledClassName="opacity-50 cursor-not-allowed"
-          breakClassName="mx-2 py-1 px-3 border rounded-md"
-          breakLinkClassName="text-blue-500"
-          onPageChange={handlePageChange}
-        />
-      </div>
-      {currentItems.map((buses) => (
-        <div key={busData.id} id={busData.id}>
+    <div className="mb-4 ">
+      <div className="border-2 border-gray-300 flex rounded-md ">
+        <div className="basis-3/4 border-r-2 border-gray-300 text-left p-4">
           <div className="flex ">
-            <div className="border-2 pl-6 w-[50vw] flex flex-col my-2 ml-10 rounded-md h-[22vh] items-start">
-              <div className="flex mt-3 items-center gap-2">
-                <div className="font-bold text-xl">{buses.name}</div>
-                <div className="flex items-center border-2 bg-green-600 justify-center gap-1 rounded-xl h-[4vh] text-white w-[3vw]">
-                  <div>
-                    <AiOutlineStar />
-                  </div>
-                  <div>{buses.rating}</div>
-                </div>
-                <div className="text-gray-400">Ratings</div>
+            <div className="font-bold flex">
+              <div className="text-xl flex">InterCity Smart Bus </div>
+              <div className="bg-green-700 text-md flex items-center w-fit rounded-md text-white p-1 ml-2">
+                <AiOutlineStar className="mr-1"/> 4.5
               </div>
-              <div className="text-sm my-2 ">
-                {buses.type} | {buses.seats} Seats Left | {buses.windowSeats}{" "}
-                Window seats
+              <div className="px-2 flex text-gray-400 items-center">
+                Ratings
               </div>
-              <div className="font-bold text-xl flex justify-center items-center gap-2 mt-2">
-                {buses.depTime}, {buses.depDate}
-                <div className="text-gray-400 text-sm">
-                  {" "}
-                  --- {buses.duration} ---{" "}
-                </div>
-                {buses.arrTime}, {buses.arrDate}
-              </div>
-              <div className="flex gap-[16vw] font-bold text-gray-400">
-                <div>{buses.depLocation}</div>
-                <div>{buses.arrLocation}</div>
-              </div>
-              <ul className="flex justify-start gap-6 mt-7 text-blue-400 font-bold mb-2">
-                {links.map((link) => (
-                  <a key={link.url} href={link.url}>
-                    {link.name}
-                  </a>
-                ))}
-              </ul>
-            </div>
-            <div className="border-2 px-6 w-fit flex flex-col my-2 rounded-md h-[22vh] gap-2 justify-center items-center">
-              <div className="font-semibold text-lg">Trip Cost</div>
-              <div className="text-gray-400 text-xs">Starting from</div>
-              <div className="font-bold text-4xl">
-                ₹ {busPrice || buses.price}
-              </div>
-              <button
-                onClick={() => handleViewSeat(buses.id)}
-                id={`img-${buses.id}`}
-                className="bg-orange-400 rounded-md text-white mx-9 p-2 px-8 font-semibold"
-              >
-                {busStates[buses.id] ? "Hide Seat" : "View Seat"}
-              </button>
             </div>
           </div>
-          <div
-            style={{ display: busStates[buses.id] ? "block" : "none" }}
-            className=" border-2 ml-10 rounded-xl "
-          >
-            <div className="ml-4 font-bold text-2xl mt-4">Select Seats</div>
-            <div className="flex justify-start gap-3 items-center ml-4">
-              <div className="text-xl text-gray-400 font-bold">Seat Price</div>
-              {["All", "699", "899", "1199", "1599"].map((price, index) => (
-                <label
-                  key={index}
-                  className="shadow-lg p-2 px-4 flex rounded-xl ml-2"
-                >
+          <div className="flex py-2 text-xs text-slate-500">
+            <div>
+              <span className="border-r pr-2 border-slate-600">
+                AC Sleeper (2-1)
+              </span>
+            </div>
+            <div>
+              <span className="border-r px-2 border-slate-600">
+                24 seats left
+              </span>
+            </div>
+            <div>
+              <span className="px-2">0 windows seat</span>
+            </div>
+          </div>
+          <div className="flex py-2 ">
+            <div>
+              <span className=" pr-2 text-lg font-semibold">22:45, 16 NOV</span>
+            </div>
+            <div>
+              <span className="px-2 text-s text-slate-500 text-center align-middle">
+                ----------07 hrs 59 mins---------
+              </span>
+            </div>
+            <div>
+              <span className="px-2 text-lg font-semibold">6:20, 17 NOV</span>
+            </div>
+          </div>
+          <div className="flex text-blue-700 pt-8">
+            {links.map((link, id) => (
+              <div key={id} className="pr-8">
+                {link}
+              </div>
+            ))}
+          </div>
+        </div>
 
+        <div className="basis-1/4 p-4">
+          <div className="text-md font-semibold">Trip Cost</div>
+          <div className="pt-3 text-xs text-gray-500">Starting from</div>
+          <div className="font-bold text-2xl">₹ 899</div>
+          <button
+            className="bg-orange-500 text-white  mt-3 py-2 px-8 rounded-md
+    duration-500"
+            onClick={() =>
+              props.busNo === props.showBus
+                ? props.setShowBus("")
+                : props.setShowBus(props.busNo)
+            }
+          >
+            View Seat
+          </button>
+        </div>
+      </div>
+      {props.showBus === props.busNo && (
+        <div className="border-2 border-gray-300 rounded-md ">
+          <div className="m-2 flex">
+            <div className="basis-4/5 text-start">
+              <div className="font-bold text-2xl ">Select Seats</div>
+              <div className="flex my-4">
+                <div className="text-gray-400">Seat Price</div>
+                <div className="border-2 border-gray-300 mr-2 ml-4 px-2 text-gray-400 rounded-md">
                   <input
+                    className="mr-2 leading-tight"
+                    name="price"
                     type="radio"
-                    value={price}
-                    checked={selection[buses.id] === price}
-                    id={buses.id}
-                    onChange={(e) => handleChange(e, buses.id)}
+                    value="All"
+                    defaultChecked={true}
+                    onClick={setFilter}
                   />
-                  <div className="ml-2">{`₹ ${price}`}</div>
-                </label>
-              ))}
-              <div className="flex mr-12 mb-4 ml-[16vw]">
-                <ul>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 flex rounded-sm "></div>
-                    Vacant Seat
-                  </div>
-                  <div className="flex items-center  gap-2">
-                    <div className="w-4 h-4 border-2 flex bg-gray-600 rounded-sm"></div>
-                    Reserved Seats
-                  </div>
-                  <div className="flex items-center  gap-2">
-                    <div className="w-4 h-4 border-2 flex bg-blue-800 rounded-sm"></div>
-                    Selected Seats
-                  </div>
-                </ul>
+                  <label className="text-sm ">₹All</label>
+                </div>
+                <div className="border-2 border-gray-300 mr-2 ml-4 px-2 text-gray-400 rounded-md">
+                  <input
+                    className="mr-2 leading-tight"
+                    name="price"
+                    type="radio"
+                    value="699"
+                    onClick={setFilter}
+                  />
+                  <label className="text-sm ">₹699</label>
+                </div>
+                <div className="border-2 border-gray-300 mr-2 ml-4 px-2 text-gray-400 rounded-md">
+                  <input
+                    className="mr-2 leading-tight"
+                    name="price"
+                    type="radio"
+                    value="899"
+                    onClick={setFilter}
+                  />
+                  <label className="text-sm ">₹899</label>
+                </div>
+                <div className="border-2 border-gray-300 mr-2 ml-4 px-2 text-gray-400 rounded-md">
+                  <input
+                    className="mr-2 leading-tight"
+                    name="price"
+                    type="radio"
+                    value="1199"
+                    onClick={setFilter}
+                  />
+                  <label className="text-sm ">₹1199</label>
+                </div>
+                <div className="border-2 border-gray-300 mr-2 ml-4 px-2 text-gray-400 rounded-md">
+                  <input
+                    className="mr-2 leading-tight"
+                    name="price"
+                    type="radio"
+                    value="1599"
+                    onClick={setFilter}
+                  />
+                  <label className="text-sm ">₹1599</label>
+                </div>
               </div>
             </div>
-            <div className="flex ">
-              <div>
-                <div className="border-2 w-[35vw] rounded-xl ml-6">
-                  <div className="flex mb-3 mt-3 justify-center gap-2">
-                    {seatIds.slice(0, 7).map((seatId) => (
-                      <img
-                        key={seatId}
-                        src={bed}
-                        alt="bed"
-                        id={seatId}
-                        className={`w-14 h-6 rounded-sm ${seatColor[seatId]}`}
-                        onClick={handleClick}
-                      />
-                    ))}
-                  </div>
-                  <div className="flex mb-3 justify-center gap-2">
-                    {seatIds.slice(7, 14).map((id) => (
-                      <img
-                        key={id}
-                        src={bed}
-                        alt="bed"
-                        id={id}
-                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
-                        onClick={handleClick}
-                      />
-                    ))}
-                  </div>
-                  <div className="flex ml-16 mb-3 justify-center gap-2 mt-12">
-                    {seatIds.slice(14, 20).map((id) => (
-                      <img
-                        key={id}
-                        src={bed}
-                        alt="bed"
-                        id={id}
-                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
-                        onClick={handleClick}
-                      />
-                    ))}
-                  </div>
+            <div className="basis-1/5 text-start text-gray-600">
+              {seats.map((seat, id) => (
+                <div key={id} className="">
+                  <input className="mr-2 leading-tight" type="checkbox" />
+                  <span className="text-md">{seat} Seats</span>
                 </div>
-                <div className="border-2 w-[35vw] mt-8 rounded-xl ml-6">
-                  <div className="flex mb-3 mt-3 justify-center gap-2">
-                    {seatIds.slice(20, 27).map((id) => (
-                      <img
-                        key={id}
-                        src={bed}
-                        alt="bed"
-                        id={id}
-                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
-                        onClick={handleClick}
-                      />
-                    ))}
+              ))}
+            </div>
+          </div>
+          <div className="flex m-2 ">
+            <div className="basis-2/3  mr-2 ">
+              <div className=" border-2 h-[18vh] border-gray-300 mb-4 flex rounded-md">
+                <div
+                  className="rotate-180 text-gray-400 mt-2 text-xs"
+                  style={{ writingMode: "vertical-rl" }}
+                >
+                  <span>Upper Birth</span>
+                </div>
+                <div className="mt-3 pl-12 ml-4">
+                  <div className="flex">
+                    <Seat
+                      seatno="01"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="02"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="03"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="04"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="05"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="06"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="07"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
                   </div>
-                  <div className="flex mb-3 mt-3 justify-center gap-2">
-                    {seatIds.slice(27, 34).map((id) => (
-                      <img
-                        key={id}
-                        src={bed}
-                        alt="bed"
-                        id={id}
-                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
-                        onClick={handleClick}
-                      />
-                    ))}
+                  <div className="flex mb-12">
+                    <Seat
+                      seatno="08"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="09"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="10"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="11"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="12"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="13"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="14"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
                   </div>
-                  <div className="flex mb-3 mt-10 justify-center gap-2 ml-16 ">
-                    {seatIds.slice(34, 40).map((id) => (
-                      <img
-                        key={id}
-                        src={bed}
-                        alt="bed"
-                        id={id}
-                        className={`w-14 h-6 rounded-sm ${seatColor[id]}`}
-                        onClick={handleClick}
-                      />
-                    ))}
+                  <div className="flex mb-2 ml-40">
+                    <Seat
+                      seatno="15"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="16"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="17"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="18"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="19"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
                   </div>
                 </div>
               </div>
-              <div className="flex-col border-2 ml-4 mb-4 rounded-xl p-4 w-[25vw]">
-                <div className="flex-col ">
-                  <div className="font-bold">Picking & Dropping</div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div>{buses.depLocation}</div>
-                      <div className="text-gray-400 text-sm">
-                        {buses.depPoint}
-                      </div>
-                    </div>
-                    <div className="font-bold text-lg">{buses.depTime}</div>
+              <div className="border-2 h-[18vh] border-gray-300 flex rounded-md">
+                <div
+                  className="rotate-180 text-gray-400 mt-2 text-xs"
+                  style={{ writingMode: "vertical-rl" }}
+                >
+                  <span>Lower Birth</span>
+                </div>
+                <div className="mt-3 pl-12 ml-4">
+                  <div className="flex mb-2">
+                    <Seat
+                      seatno="20"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="21"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="22"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="23"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="24"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="25"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="26"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                  </div>
+                  <div className="flex mb-12">
+                    <Seat
+                      seatno="27"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="28"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="29"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="30"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="31"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="32"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="33"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                  </div>
+                  <div className="flex mb-2 ml-40">
+                    <Seat
+                      seatno="34"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="35"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="36"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="37"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
+                    <Seat
+                      seatno="38"
+                      setSelectedSeat={setSelectedSeat}
+                      filteredSeats={filteredSeats}
+                      setFilterPrice={setFilterPrice}
+                    />
                   </div>
                 </div>
-                <div className="flex-col ">
-                  <div className="flex items-center justify-between">
-                    <div className="mt-8">
-                      <div>{buses.arrLocation}</div>
-                      <div className="text-gray-400 text-sm">
-                        {buses.arrPoint}
-                      </div>
-                    </div>
-                    <div className="font-bold text-lg">{buses.arrTime}</div>
-                  </div>
-                </div>
-                <hr className="border-2" />
-                <div className="font-bold">Seat No. 7</div>
-                <hr className="border-2 " />
-                <div className="font-bold">Fare Details</div>
-                <div className="flex justify-between">
+              </div>
+            </div>
+            <div className="basis-1/3 border-2 border-gray-300 rounded-md">
+              <div className="my-2 mx-3 text-start">
+                <div className="font-bold text-xl">Boarding and Dropping</div>
+                <div className="flex justify-between my-2">
                   <div>
-                    <div>Amount</div>
-                    <div>{buses.depPoint}</div>
+                    <div className="font-semibold ">-Pune</div>
+                    <div className="text-gray-400">Taxi Service</div>
                   </div>
-                  <div className="font-bold text-xl">
-                    INR {busPrice || buses.price}
-                  </div>
+                  <div className="text-sm font-bold">22:45</div>
                 </div>
-                <div className="flex justify-center">
-                  <button
-                    onClick={handleClicked}
-                    className="bg-orange-400 text-white p-4 w-[20vw] font-bold text-xl rounded-xl mt-4"
-                  >
-                    Proceed to Book
+                <div className="flex justify-between mt-2 border-b-2 border-gray-300 pb-2 pt-2">
+                  <div>
+                    <div className="font-semibold">-Kolkata</div>
+                    <div className="text-gray-400">Taxi Service</div>
+                  </div>
+                  <div className="text-sm font-bold">06:20</div>
+                </div>
+                <div className="flex justify-between text-xl font-bold border-b-2 border-gray-300 py-1">
+                  <div>Seat No</div>
+                  <div>{selectedSeat}</div>
+                </div>
+                <div className=" text-xl font-bold py-1">Fare Details</div>
+                <div className="flex justify-between my-1">
+                  <div>
+                    <div className="text-xl font-bold">Amount</div>
+                    <div className="text-sm text-gray-400">Taxi Service</div>
+                  </div>
+                  <div className="text-md font-bold">INR {filterPrice}</div>
+                </div>
+                <div>
+                  <button className="bg-orange-500 text-white mt-6 py-2 px-8 w-full rounded-md">
+                    <Link to="/info">Proceed to Book</Link>
                   </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      ))}
+      )}
     </div>
   );
 };

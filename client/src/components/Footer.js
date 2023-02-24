@@ -1,13 +1,13 @@
 import React from "react";
 import { AiOutlineInstagram, AiOutlineFacebook } from "react-icons/ai";
-
+import { FaBus } from "react-icons/fa";
 const Footer = () => {
   return (
     <div className="bg-gray-300 mt-6">
       <div className="flex justify-around pt-8 pb-3 ">
         <div>
           <div className="flex text-yellow-600">
-            <span class="material-icons self-center">directions_bus</span>
+            <span class="material-icons self-center "><FaBus color="orange"/></span>
             <button className="font-bold text-xl">RESERVE</button>
           </div>
           <div className="flex flex-col w-[24vw] text-start">
