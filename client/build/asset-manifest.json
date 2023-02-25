@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.63a38db8.css",
-    "main.js": "/static/js/main.c8e4db6c.js",
+    "main.css": "/static/css/main.00417e28.css",
+    "main.js": "/static/js/main.9ea6842a.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
-    "static/media/background.webp": "/static/media/background.09cc71960f4f22c08c3f.webp",
-    "static/media/bus-logo3.png": "/static/media/bus-logo3.02c56a49aca7dbdc42cb.png",
-    "static/media/bus-logo1.png": "/static/media/bus-logo1.7ac1e065aae43243f96a.png",
+    "static/media/bus-logo1.png": "/static/media/bus-logo1.1c94df6d818e2d0d4876.png",
+    "static/media/bus-logo3.png": "/static/media/bus-logo3.3e4906d6f00049d112d0.png",
+    "static/media/bus-logo2.png": "/static/media/bus-logo2.01a8040c14d86cc1090f.png",
+    "static/media/background.jpg": "/static/media/background.2519989f9f7396ad6100.jpg",
     "index.html": "/index.html",
-    "main.63a38db8.css.map": "/static/css/main.63a38db8.css.map",
-    "main.c8e4db6c.js.map": "/static/js/main.c8e4db6c.js.map",
+    "main.00417e28.css.map": "/static/css/main.00417e28.css.map",
+    "main.9ea6842a.js.map": "/static/js/main.9ea6842a.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.63a38db8.css",
-    "static/js/main.c8e4db6c.js"
+    "static/css/main.00417e28.css",
+    "static/js/main.9ea6842a.js"
   ]
 }
