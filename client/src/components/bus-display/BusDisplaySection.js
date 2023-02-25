@@ -12,9 +12,9 @@ export const BusDisplaySection = () => {
   return (
     <>
       <Calender />
-      <div className="bus-container">
+     <div className="h-screen p-6 flex w-full">
         <SideBar />
-        <div className="bus-cards">
+        <div className="w-full px-4">
           {buses.map((el, i) => (
             <BusCard
               key={el._id}

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button } from "../ui/Button/Button";
 import "../../styles/Bus-display/buscard.css";
 import BusCardLeft from "./BusCardLeft";
 import BusSeats from "./BusSeats";
@@ -48,8 +47,8 @@ const BusCard = ({
   };
   return (
     <>
-      <div className="bus-card">
-        <div className="bus-card-content">
+      <div className="w-full border-2 border-gray-400 rounded-md flex flex-col mb-10 shadow-md">
+        <div className="flex">
           <BusCardLeft
             data={busData}
             routeId={routeId}
@@ -58,14 +57,14 @@ const BusCard = ({
             destination={destination}
             source={source}
           />
-          <div className="bus-card-right">
-            <div className="bus-right-text">
-              <p className="bus-cost">Trip Cost</p>
-              <h3>Starts From</h3>
-              <p className="bus-price">₹ 500</p>
+          <div className="w-[20vw] py-4 border-l-2 border-gray-400 flex flex-col justify-between items-center text-center ">
+            <div className="text-md">
+              <div className="text-xl font-bold">Trip Cost</div>
+              <div>Starts From</div>
+              <div className="text-2xl my-2 font-bold">₹ 500</div>
             </div>
-            <div className="bus-right-btn" onClick={seatDisplayHandler}>
-              <Button name={"View Seat"} />
+            <div onClick={seatDisplayHandler}>
+              <button className="bg-orange-500 p-2 rounded-lg text-white font-bold text-xl px-3">View Seat</button>
             </div>
           </div>
         </div>

@@ -1,6 +1,4 @@
 import React from "react";
-import { Button } from "../ui/Button/Button";
-import "../../styles/Bus-display/busticket.css";
 import { useNavigate } from "react-router-dom";
 
 const BusTicket = ({ selectedBus }) => {
@@ -18,50 +16,49 @@ const BusTicket = ({ selectedBus }) => {
     navigate("/info");
   };
   return (
-    <div className="bus-ticket-container">
-      <div className="bus-ticket-heading">
-        <h3 className="heading">Boarding and Dropping</h3>
+    <div className="flex flex-col justify-between px-10 py-5 border-2 border-gray-400 w-[40%] ml-10 rounded-md">
+      <div className="text-lg font-bold">
+        <div className="text-3xl text-center">Boarding and Dropping</div>
+      </div>
+        <div className="mt-4 text-2xl font-bold">
+          <div>Fare Details</div>
+        </div>
+      <div className="flex justify-between ">
+        <div >
+          <div className="font-bold text-lg">{bus.source} </div>
+          <div className="">Taxi Stand, Mughal Road</div>
+        </div>
+        <div className="font-bold text-lg">
+          <div>{bus.departureTime}</div>
+        </div>
+      </div>
+      <div className="flex justify-between">
+        <div >
+          <div className="font-bold text-lg">{bus.destination} </div>
+          <div className="">Taxi Stand, Mughal Road</div>
+        </div>
+        <div className="font-bold text-lg">
+          <div>{bus.arrivalTime}</div>
+        </div>
+      </div>
+      <div className="font-bold text-lg flex justify-between">
+        <div>Seat No.</div>
+        <div>{mappedSeats}</div>
+      </div>
+      <div >
+        <div className="fare flex justify-between">
+          <div >
+            <div className="text-xl font-bold">Amount</div>
+            <div >Taxi Stand, Mughal Road</div>
+          </div>
+          <div className="text-xl font-bold">
+            <div>INR {price}</div>
+          </div>
+        </div>
       </div>
       <br />
-      <div className="bus-ticket-destination d-flex">
-        <div className="left-part">
-          <p className="destination">{bus.source} </p>
-          <p className="destination-sub-heading">Taxi Stand, Mughal Road</p>
-        </div>
-        <div className="right-part">
-          <p>{bus.departureTime}</p>
-        </div>
-      </div>
-      <div className="bus-ticket-destination d-flex">
-        <div className="left-part">
-          <p className="destination">{bus.destination} </p>
-          <p className="destination-sub-heading">Taxi Stand, Mughal Road</p>
-        </div>
-        <div className="right-part">
-          <p>{bus.arrivalTime}</p>
-        </div>
-      </div>
-      <div className="seat-number d-flex">
-        <p>Seat No.</p>
-        <p>{mappedSeats}</p>
-      </div>
-      <div className="fare-details">
-        <div className="bus-ticket-heading">
-          <p>Fare Details</p>
-        </div>
-        <div className="fare d-flex">
-          <div className="fare-amount">
-            <p className="destination">Amount</p>
-            <p className="destination-sub-heading">Taxi Stand, Mughal Road</p>
-          </div>
-          <div className="fare-price">
-            <p>INR {price}</p>
-          </div>
-        </div>
-      </div>
-      <br />
-      <div className="proceed-btn" onClick={onSubmitHandler}>
-        <Button name={"Proceed To Book"} />
+      <div  onClick={onSubmitHandler}>
+        <button className="bg-orange-500 w-full text-white text-xl py-3 rounded-lg font-bold" >Proceed to Book</button>
       </div>
     </div>
   );

@@ -13,7 +13,6 @@ export const Home = () => {
       <HomeCard />
       <div className="mt-[22vh] py-10">
       <HomeCustomers />
-
       </div>
       <Footer />
     </>

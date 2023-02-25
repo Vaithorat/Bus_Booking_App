@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const BusDetailsRouter = require("./routes/busDetails");
 const mongoose = require("mongoose");
 const URL =
-  "mongodb+srv://srini624618:SRIni3155@atlascluster.v1ayk1c.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://vaibhav:vaibhav@cluster0.rcimutt.mongodb.net/?retryWrites=true&w=majority";
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());

@@ -4,12 +4,12 @@ import { Box2 } from "./Box2";
 
 const SideBar = () => {
   return (
-    <div className="sideBar-container">
-      <div className="filter-box">
-        <h3>Filter</h3>
-        <h3>Clear All</h3>
+    <div className="">
+      <div className="flex justify-between w-full border-2 border-black rounded-lg px-2 text-lg font-semibold">
+        <div>Filter</div>
+        <div>Clear All</div>
       </div>
-      <div className="filter-box2">
+      <div className="w-[13vw] border-2 border-gray-200 rounded-md mt-2">
         <Box
           name={"Departure Time"}
           text={"Morning Session"}

@@ -50,7 +50,7 @@ export const SearchBus = () => {
   };
   const searchBusHandler = async () => {
     const fetchdata = await fetch(
-      "https://reservebus.onrender.com/getDetails",
+      "https://bus-booking-app.netlify.app/getDetails",
       {
         method: "POST",
         body: JSON.stringify(details),

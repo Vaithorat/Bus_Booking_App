@@ -34,7 +34,7 @@ const InfoPage = () => {
       routeId: busInformation[0]._id,
     };
     const fetchdata = await fetch(
-      "https://reservebus.onrender.com/bookTicket",
+      "https://bus-booking-app.netlify.app/bookTicket",
       {
         method: "POST",
         body: JSON.stringify(data),
