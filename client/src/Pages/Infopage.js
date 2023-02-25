@@ -1,9 +1,9 @@
 import React from "react";
 import BusInfoCard from "../Components/BusInfoCard";
-import DetailsInputCard from "../Components/DetailsInputCard";
-import FareDetailsCard from "../Components/FareDetailsCard";
+import CusDetails from "../Components/CusDetails";
+import FareDetails from "../Components/FareDetails";
 
-const Info_page = () => {
+const Infopage = () => {
   return (
     <div className="flex mt-24 mb-8 mx-10">
       <div className="basis-3/4  mr-3 ">
@@ -11,11 +11,11 @@ const Info_page = () => {
         <div className="font-bold text-xl text-left mt-8 mb-4">
           Enter traveller Details
         </div>
-        <DetailsInputCard />
+        <CusDetails />
       </div>
-      <FareDetailsCard />
+      <FareDetails />
     </div>
   );
 };
 
-export default Info_page;
+export default Infopage;

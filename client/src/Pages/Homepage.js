@@ -3,40 +3,41 @@ import Card from "../Components/Card";
 import RatingCard from "../Components/RatingCard";
 import Background from "../images/background.jpg";
 import { Link } from "react-router-dom";
-import buses from "../images/buses.jpg";
+import bus from "../images/buspic.png";
+import emojis from "../images/emojis.png";
+import ticket from "../images/ticket.png";
 import SearchInput from "../Components/SearchInput";
 import { useDispatch } from "react-redux";
 import { setFromTo } from "../state/actions/fromTo";
 
-const Home_Page = (props) => {
+const Homepage = (props) => {
   const [from, setFrom] = useState("");
-  const [to,setTo] = useState("")
+  const [to, setTo] = useState("");
   const data = ["Mumbai ", "Pune", "Delhi", "Chennai", "Banglore"];
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleClick = async () => {
     props.setAuthentication(true);
-    await setFromTo(dispatch,{
-      From:from,
-      To:to
-    })
-  }
+    await setFromTo(dispatch, {
+      From: from,
+      To: to,
+    });
+  };
   const cardDetails = [
     {
       title: "2000+",
       description: "bus collection",
-      imageURL: buses,
+      imageURL: bus,
     },
     {
       title: "20 Million",
       description: "happy customers globally",
-      imageURL: "https://image.emojipng.com/645/3039645.jpg",
+      imageURL: emojis,
     },
     {
       title: "5000+",
       description: "tickets book everyday",
-      imageURL:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUqjpYRNuYwypwqkCHVCrpTtRN_ij7b960Tw&usqp=CAU",
+      imageURL: ticket,
     },
   ];
   const ratingsDetails = [
@@ -60,25 +61,32 @@ const Home_Page = (props) => {
   return (
     <div>
       <div
-        className="bg-cover bg-center h-[120vh]"
+        className="bg-cover bg-center h-[60vh]"
         style={{ backgroundImage: `url(${Background}) ` }}
       >
         <div className="flex-col flex items-center">
-          <div className="flex flex-col md:flex-row justify-center items-center pt-[15vh] h-[65vh] rounded-xl ">
+          <div className="flex justify-center items-center pt-[15vh] h-[35vh] rounded-xl ">
             <div className="border-2 pr-3 py-4 rounded-l-xl text-left pl-3 bg-white">
-              <SearchInput setVal={setFrom} data={data} placeholder="From" />
+              <label>
+                From
+                <SearchInput setVal={setFrom} data={data} />
+              </label>
             </div>
             <div className="border-2 pr-3 py-4 text-left pl-3 bg-white">
-              <SearchInput setVal={setTo} data={data} placeholder="To" />
+              <label>
+                To
+                <SearchInput setVal={setTo} data={data} />
+              </label>
             </div>
             <div className="border-2 pr-3 py-4 pl-3 rounded-r-xl bg-white">
-              <input
-                type="date"
-                className="w-80 form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                placeholder="Travel-Date"
-                aria-label="Travel-Date"
-                aria-describedby="button-addon2"
-              />
+              <label>
+                Travel Date
+                <input
+                  type="date"
+                  className=" block px-3 py-1.5 text-gray-700 bg-white w-[12vw] border  border-gray-300 rounded "
+                  placeholder="Travel-Date"
+                />
+              </label>
             </div>
           </div>
           <button className="text-white bg-[#FF8700] mt-6 p-4 text-3xl rounded-xl px-16 ">
@@ -94,7 +102,7 @@ const Home_Page = (props) => {
           </button>
         </div>
       </div>
-      <div className="font-bold text-center py-10 text-2xl">
+      <div className="font-bold text-center py-10 text-4xl">
         Travel with world's largest bus service
       </div>
       <div className="flex items-center flex-col m-5  md:flex-row md:justify-center ">
@@ -107,7 +115,7 @@ const Home_Page = (props) => {
           />
         ))}
       </div>
-      <div className="font-bold text-2xl py-[5vh]">
+      <div className="font-bold text-3xl py-[5vh]">
         Here's what a few of our customers <br /> have to say
       </div>
       <div className="flex items-center flex-col mt-5 mb-16 py-10 w-full md:flex-row md:justify-center bg-slate-200">
@@ -125,4 +133,4 @@ const Home_Page = (props) => {
   );
 };
 
-export default Home_Page;
+export default Homepage;
