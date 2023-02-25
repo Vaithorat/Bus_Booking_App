@@ -1,7 +1,7 @@
 import React from "react";
 import BusInfoCard from "../Components/BusInfoCard";
-import CusDetails from "../Components/CusDetails";
-import FareDetails from "../Components/FareDetails";
+import DetailsInputCard from "../Components/DetailsInputCard";
+import FareDetailsCard from "../Components/FareDetailsCard";
 
 const Info_page = () => {
   return (
@@ -11,9 +11,9 @@ const Info_page = () => {
         <div className="font-bold text-xl text-left mt-8 mb-4">
           Enter traveller Details
         </div>
-        <CusDetails />
+        <DetailsInputCard />
       </div>
-      <FareDetails />
+      <FareDetailsCard />
     </div>
   );
 };
