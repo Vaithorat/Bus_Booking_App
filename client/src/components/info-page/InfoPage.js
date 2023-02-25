@@ -49,9 +49,9 @@ const InfoPage = () => {
     navigate("/info/payment");
   };
   return (
-    <div className="info-page-container">
-      <div className="info-page-left">
-        <div className="bus-card-container">
+    <div className="flex">
+      <div className="w-full">
+        <div className="p-4 border-2 border-gray-400 shadow-lg rounded-2xl ml-8 mt-12">
           <BusCardLeft data={selectedBus} />
         </div>
         <InputContainer
@@ -62,7 +62,7 @@ const InfoPage = () => {
           age={age}
         />
       </div>
-      <div className="info-page-right">
+      <div className="w-[24vw] mx-12">
         <FareDetails price={price} onSubmitHandler={onSubmitHandler} />
       </div>
     </div>

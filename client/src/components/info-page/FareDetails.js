@@ -3,31 +3,32 @@ import { Button } from "../ui/Button/Button";
 
 const FareDetails = ({ price, onSubmitHandler }) => {
   return (
-    <div className="fare-details-container">
+    <div className="w-full  border-2 border-black p-4 mt-14 rounded-lg">
       <div className="travel-details-heading" style={{ margin: 0 }}>
         <h3>Fare Details</h3>
       </div>
-      <div className="fare-detail-container">
-        <div className="fare-detail">
-          <h4 className="fare-detail-content">Base Fare</h4>
-          <span className="fare-amt">{price}</span>
+      <div className="border-b-2 border-black">
+        <div className="flex justify-between my-4">
+          <div>Base Fare</div>
+          <div className="font-bold">{price}</div>
         </div>
-        <div className="fare-detail">
-          <h4 className="fare-detail-content">Tax</h4>
-          <span className="fare-amt">0</span>
+        <div className="flex justify-between my-4">
+          <div>Tax</div>
+          <div className="font-bold">0</div>
+        </div>
+        <div className="flex justify-between my-4">
+          <div>Offer Applied</div>
+          <div className="font-bold">0</div>
         </div>
       </div>
-      <div className="fare-detail">
-        <h3 className="fare-detail-content">Total Price</h3>
-        <span
-          className="fare-amt"
-          style={{ fontSize: "20px", fontWeight: "600" }}
-        >
+      <div className="flex justify-between my-4">
+        <div>Total Price</div>
+        <div className="font-bold text-xl">
           {price}
-        </span>
+        </div>
       </div>
-      <div className="fare-btn" onClick={onSubmitHandler}>
-        <Button name={"Proceed To Payment"} />
+      <div className="flex justify-center items-center" onClick={onSubmitHandler}>
+        <button className="bg-orange-500 p-4 rounded-lg text-white text-xl font-bold">Proceed to Payment</button>
       </div>
     </div>
   );
