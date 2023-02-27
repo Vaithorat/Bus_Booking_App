@@ -50,7 +50,7 @@ export const SearchBus = () => {
   };
   const searchBusHandler = async () => {
     const fetchdata = await fetch(
-      "https://bus-booking-app-two.vercel.app/getDetails",
+      "https://bus-booking-rn1n.onrender.com/getDetails",
       {
         method: "POST",
         body: JSON.stringify(details),
