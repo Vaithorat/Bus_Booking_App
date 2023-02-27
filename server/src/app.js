@@ -13,6 +13,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the bus booking API!");
+});
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   next();
