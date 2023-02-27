@@ -32,7 +32,7 @@ const BusCard = ({
       date: date,
       busId: _id,
     };
-    const fetchdata = await fetch("https://reservebus.onrender.com/getSeats", {
+    const fetchdata = await fetch("https://bus-booking-app.netlify.app/getSeats", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

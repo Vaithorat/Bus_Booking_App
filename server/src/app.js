@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Set Access-Control-Allow-Origin header
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   next();
@@ -24,4 +24,5 @@ mongoose.set("strictQuery", false);
 mongoose
   .connect(URL, { useNewUrlParser: true })
   .then((res) => console.log("connected to the database"))
-  .then(() => app.listen(PORT, () => console.log("connected to server")));
+  .then(() => app.listen(PORT, () => console.log("connected to server")))
+  .catch((err) => console.log(err)); // error handling

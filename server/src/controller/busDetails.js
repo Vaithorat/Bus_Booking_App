@@ -11,15 +11,14 @@ exports.getBusDetails = async (req, res, next) => {
       destination: from,
     }).populate("buses");
     if (!cities || cities.length === 0) {
-      const error = new Error("could not find the selected routes");
-      throw error;
+      throw new Error("Could not find the selected routes");
     }
     res.status(200).json(cities);
   } catch (err) {
     console.log(err);
     res
       .status(400)
-      .json({ message: "could not find the selected routes", error: true });
+      .json({ message: "Could not find the selected routes", error: true });
   }
 };
 
@@ -49,6 +48,7 @@ exports.bookTicket = async (req, res, next) => {
     userAge,
     totalPrice,
   });
+
   await booking.save();
   res.json(booking);
 };
@@ -56,27 +56,26 @@ exports.bookTicket = async (req, res, next) => {
 exports.getSeats = async (req, res, next) => {
   const { routeId, date, busId } = req.body;
   const booking = await BookingModel.find({
-    busId: busId,
-    routeId: routeId,
+    busId,
+    routeId,
     dateOfJourney: date,
   });
-  let mappedArr;
-  if (booking.length > 0) {
-    mappedArr = booking.map((el, i) => el.seatsBooked).flat();
-  } else {
-    mappedArr = booking;
-  }
+
+  const mappedArr = booking.length > 0 ? booking.map((el, i) => el.seatsBooked).flat() : [];
+
   res.status(200).json(mappedArr);
 };
 
 exports.getRoutesFromId = async (req, res, next) => {
-  let { id } = req.params;
+  const { id } = req.params;
+
   const cities = await Routes.findById(id).populate("buses");
   res.json(cities);
 };
 
 exports.getRoutes = async (req, res, next) => {
   const routes = await Routes.find();
+
   const mappedArr = routes.map((el, i) => {
     return {
       source: el.source,
@@ -85,5 +84,6 @@ exports.getRoutes = async (req, res, next) => {
       reachingTime: el.arrivalTime,
     };
   });
+
   res.json(mappedArr);
 };

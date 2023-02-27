@@ -13,6 +13,7 @@ const busBookingSchema = new Schema(
       {
         seatNumber: {
           type: String,
+          required: true,
         },
       },
     ],
@@ -38,7 +39,7 @@ const busBookingSchema = new Schema(
       required: true,
     },
     totalPrice: {
-      type: String,
+      type: Number,
       required: true,
     },
   },
