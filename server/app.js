@@ -8,9 +8,15 @@ const mongoose = require("mongoose");
 const URL =
   "mongodb+srv://vaibhav:vaibhav@cluster0.rcimutt.mongodb.net/?retryWrites=true&w=majority";
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
+
+// Set Access-Control-Allow-Origin header
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 app.use(BusDetailsRouter);
 

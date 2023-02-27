@@ -50,7 +50,7 @@ export const SearchBus = () => {
   };
   const searchBusHandler = async () => {
     const fetchdata = await fetch(
-      "https://bus-booking-app.netlify.app/getDetails",
+      "https://bus-booking-app-two.vercel.app/getDetails",
       {
         method: "POST",
         body: JSON.stringify(details),
