@@ -50,7 +50,7 @@ export const SearchBus = () => {
   };
   const searchBusHandler = async () => {
     const fetchdata = await fetch(
-      "https://bus-booking-rn1n.onrender.com/getDetails",
+      "https://bus-booking-u2o9.onrender.com/getDetails",
       {
         method: "POST",
         body: JSON.stringify(details),

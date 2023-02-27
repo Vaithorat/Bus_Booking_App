@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Box2 = ({ text, search }) => {
+export const Box2 = ({ text }) => {
   return (
     <div className=" flex flex-col items-start justify-around w-full h-[15vh]  border-gray-300 ml-4">
       <div className="font-bold">{text}</div>

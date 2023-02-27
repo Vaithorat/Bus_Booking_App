@@ -21,7 +21,7 @@ const SearchOutput = ({
       </div>
       {modal && (
         <motion.div
-          className="bg-gray-500 p-2 text-white rounded-b-md "
+          className="bg-gray-500 p-2 text-white rounded-b-lg "
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ ease: "easeInOut", duration: 0.3 }}

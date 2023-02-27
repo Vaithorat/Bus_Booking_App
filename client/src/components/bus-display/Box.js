@@ -1,6 +1,6 @@
 import React from "react";
 
-const Box = ({ name, text, text2, text3, search }) => {
+const Box = ({ name, text, text2, text3 }) => {
   return (
     <div className=" flex flex-col items-start justify-around w-full h-[15vh]  border-gray-300 ml-4">
       <div>

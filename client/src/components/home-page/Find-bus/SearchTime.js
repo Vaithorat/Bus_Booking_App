@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 const SearchTime = ({ getDateHandler }) => {
   const ref = useRef();
   return (
-    <div className="">
+    <div >
       <div className="bg-white h-[10vh] gap-4 rounded-xl">
         <label className="p-2 text-2xl">
           Travel Date
